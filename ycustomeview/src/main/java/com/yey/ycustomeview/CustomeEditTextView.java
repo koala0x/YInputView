@@ -176,4 +176,7 @@ public class CustomeEditTextView extends FrameLayout {
         // hint
         mTvHint.setTextColor(mErrColor);
     }
+
+
+
 }
