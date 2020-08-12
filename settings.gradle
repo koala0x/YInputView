@@ -1,0 +1,3 @@
+include ':ycustomeview'
+include ':app'
+rootProject.name = "YCustomInputView"

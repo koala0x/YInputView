@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mVM"
+            type="com.yey.MyVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <com.yey.ycustomeview.CustomeEditTextView
+            android:id="@+id/cetv_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+
+            app:y_err_desc="错误"
+            app:y_hint_desc="提示" />
+
+        <com.yey.ycustomeview.CustomeEditTextView
+            android:id="@+id/cetv_2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            app:y_err_desc="错误"
+            app:y_hint_desc="提示" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示错误" />
+
+        <Button
+            android:id="@+id/btn_lose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐藏错误" />
+
+        <Button
+            android:id="@+id/btn_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打印数据" />
+
+
+    </LinearLayout>
+</layout>
