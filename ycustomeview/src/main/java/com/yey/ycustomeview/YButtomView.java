@@ -194,4 +194,40 @@ public class YButtomView extends FrameLayout {
         }
     }
 
+    // 为ImageView加载图片
+    @BindingAdapter("y_image_url")
+    public static void setImageURL(YButtomView ybv, String url) {
+        if (ybv != null && url != null && ybv.mYLoadImageListener != null) {
+            if (url.startsWith("http")) {
+                // 通过网络加载图片
+                ybv.mYLoadImageListener.loadHtpp(ybv.mIvImage, url);
+            } else {
+                // 通过本地资源加载图片
+                ybv.mYLoadImageListener.loadLocal(ybv.mIvImage, url);
+            }
+        }
+    }
+
+    public interface YLoadImageListener {
+        /**
+         * 通过网络添加图片
+         */
+        void loadHtpp(ImageView imageView, String url);
+
+        /**
+         * 通过本地加载图片
+         */
+        void loadLocal(ImageView imageView, String url);
+    }
+
+    private YLoadImageListener mYLoadImageListener;
+
+    /**
+     * 设置加载图片监听
+     *
+     * @param yLoadImageListener
+     */
+    public void setYLoadImageListener(YLoadImageListener yLoadImageListener) {
+        mYLoadImageListener = yLoadImageListener;
+    }
 }

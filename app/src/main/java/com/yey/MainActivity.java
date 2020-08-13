@@ -9,6 +9,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yey.databinding.ActivityMainBinding;
@@ -67,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mainBinding.ybtn1.setYLoadImageListener(new YButtomView.YLoadImageListener() {
+            @Override
+            public void loadHtpp(ImageView imageView, String url) {
+                Log.e(TAG, "网络加载"+url);
+            }
+
+            @Override
+            public void loadLocal(ImageView imageView, String url) {
+                Log.e(TAG, "本地加载"+url);
+            }
+        });
+
 
         initVM();
     }
@@ -78,7 +91,10 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.setMVM(myVM);
         myVM.mContentMLD1.setValue("1");
         myVM.mContentMLD2.setValue("2");
+        // 报错提示
         myVM.mErrStatus.setValue(true);
+        // 加载图片
+        myVM.mLoadImageUrl.setValue("https://github.com/");
         mainBinding.cetv1.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         // 设置一行
         mainBinding.cetv1.getEditText().setSingleLine();

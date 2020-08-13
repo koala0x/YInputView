@@ -23,7 +23,8 @@
             app:y_content_desc="牌照"
             app:y_err_desc="错误"
             app:y_err_status="@{mVM.mErrStatus}"
-            app:y_image_id="@drawable/kk" />
+            app:y_image_id="@drawable/kk"
+            app:y_image_url="@{mVM.mLoadImageUrl}" />
 
         <com.yey.ycustomeview.YEditTextView
             android:id="@+id/cetv_1"
