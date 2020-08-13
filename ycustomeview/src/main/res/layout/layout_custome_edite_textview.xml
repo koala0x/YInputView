@@ -23,6 +23,7 @@
         android:layout_weight="3"
         android:background="@android:color/transparent"
         android:gravity="bottom"
+        android:textColor="@android:color/black"
         android:textSize="14sp"
         tools:text="内容" />
 
@@ -30,10 +31,10 @@
         android:id="@+id/v_y_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:background="@color/yey_line"
         android:focusable="true"
-        android:layout_marginTop="2dp"
         android:focusableInTouchMode="true" />
 
     <TextView

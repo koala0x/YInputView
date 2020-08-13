@@ -1,9 +1,14 @@
 package com.yey.ycustomeview;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +18,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
-
+// https://stackoverflow.com/a/34817565/7986616
 public class CustomeEditTextView extends FrameLayout {
     private static final String TAG = "CustomeEditTextView 日志";
     // 控件高度
@@ -23,7 +31,7 @@ public class CustomeEditTextView extends FrameLayout {
     private TextView mTvHint;
     private String mErrStr;
     private String mHintStr;
-    private String mContentStr;
+    private static String mContentStr;
     private int mErrColor;
     // 失去焦点时候提示颜色
     private int mLoseFocusColor;
@@ -33,10 +41,11 @@ public class CustomeEditTextView extends FrameLayout {
     private View mLineView;
 
     // 是否获取焦点
-    private boolean etHasFocus;
+    private static boolean etHasFocus;
 
     // 是否是错误状态
     private boolean hasErrStatus;
+
 
     public CustomeEditTextView(@NonNull Context context) {
         this(context, null);
@@ -66,6 +75,7 @@ public class CustomeEditTextView extends FrameLayout {
         typedArray.recycle();
     }
 
+
     // 初始化View
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custome_edite_textview, this);
@@ -74,7 +84,9 @@ public class CustomeEditTextView extends FrameLayout {
         mEtContent.setText(mContentStr);
         mEtContent.setTextColor(mEtContentColor);
         mEtContent.setHintTextColor(mLoseFocusColor);
-        mEtContent.setHint(mHintStr);
+        if (TextUtils.isEmpty(mContentStr)) {
+            mEtContent.setHint(mHintStr);
+        }
 
         mTvHint = (TextView) findViewById(R.id.tv_y_hint);
         mTvHint.setText(mHintStr);
@@ -94,6 +106,7 @@ public class CustomeEditTextView extends FrameLayout {
             mTvHint.setVisibility(View.VISIBLE);
         }
         mTvErr.setVisibility(View.INVISIBLE);
+
     }
 
 
@@ -133,6 +146,7 @@ public class CustomeEditTextView extends FrameLayout {
                         // 如果没有输入数据
                         mEtContent.setText("");
                         mEtContent.setHint(mHintStr);
+
                         mTvHint.setVisibility(INVISIBLE);
                         mTvHint.setText("");
                     }
@@ -154,6 +168,24 @@ public class CustomeEditTextView extends FrameLayout {
                 mEtContent.requestFocus();
             }
         });
+        mEtContent.setInputType(InputType.TYPE_CLASS_TEXT);
+        mEtContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String mStr = s.toString();
+                if (!TextUtils.isEmpty(mStr)) {
+                    mTvHint.setVisibility(VISIBLE);
+                }
+            }
+        });
     }
 
     /**
@@ -166,6 +198,7 @@ public class CustomeEditTextView extends FrameLayout {
             setErrStatus();
         }
     }
+
     /**
      * 显示错误信息
      */
@@ -203,6 +236,42 @@ public class CustomeEditTextView extends FrameLayout {
         mTvHint.setTextColor(mErrColor);
     }
 
+    // SET 方法
+    @BindingAdapter("y_content")
+    public static void setStr(CustomeEditTextView cetv, String content) {
+        if (cetv != null) {
+            String mCurrentStr = cetv.mEtContent.getText().toString().trim();
+            if (!TextUtils.isEmpty(content)) {
+                if (!content.equalsIgnoreCase(mCurrentStr)) {
+                    cetv.mEtContent.setText(content);
+                }
+            }
+        }
+    }
 
+    // GET 方法
+    @InverseBindingAdapter(attribute = "y_content", event = "contentAttrChanged")
+    public static String getStr(CustomeEditTextView cetv) {
+        return cetv.mEtContent.getText().toString().trim();
+    }
 
+    // 监听,如果有变动就调用listener中的onChange方法
+    @BindingAdapter(value = "contentAttrChanged")
+    public static void setChangeListener(CustomeEditTextView cetv, InverseBindingListener listener) {
+        cetv.mEtContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listener.onChange();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
 }

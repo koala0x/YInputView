@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-
+            app:y_content="@={mVM.mContentMLD1}"
             app:y_err_desc="错误"
             app:y_hint_desc="提示" />
 
@@ -29,9 +29,10 @@
             android:id="@+id/cetv_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-
+            app:y_content="@={mVM.mContentMLD2}"
             app:y_err_desc="错误"
             app:y_hint_desc="提示" />
+
 
         <Button
             android:id="@+id/btn"
@@ -50,7 +51,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="打印数据" />
-
-
     </LinearLayout>
 </layout>

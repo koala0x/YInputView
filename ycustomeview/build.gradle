@@ -33,6 +33,9 @@ android {
         options.addStringOption('encoding', 'UTF-8')
         options.addStringOption('charSet', 'UTF-8')
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {

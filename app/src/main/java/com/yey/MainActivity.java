@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private void initVM() {
         myVM = new ViewModelProvider(this).get(MyVM.class);
         mainBinding.setMVM(myVM);
+        myVM.mContentMLD1.setValue("1");
+        myVM.mContentMLD2.setValue("2");
         mainBinding.btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
