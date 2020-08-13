@@ -76,7 +76,7 @@ public class YEditTextView extends FrameLayout {
 
     // 初始化View
     private void initView(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.layout_custome_edite_textview, this);
+        LayoutInflater.from(context).inflate(R.layout.layout_y_edite_textview, this);
         // 设置内容
         mEtContent = (EditText) findViewById(R.id.et_y_content);
         mEtContent.setText(mContentStr);
