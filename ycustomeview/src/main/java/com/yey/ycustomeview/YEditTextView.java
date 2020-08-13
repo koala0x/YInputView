@@ -1,18 +1,15 @@
 package com.yey.ycustomeview;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -24,7 +21,7 @@ import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
 // https://stackoverflow.com/a/34817565/7986616
-public class CustomeEditTextView extends FrameLayout {
+public class YEditTextView extends FrameLayout {
     private static final String TAG = "CustomeEditTextView 日志";
     // 控件高度
     private EditText mEtContent;
@@ -48,15 +45,15 @@ public class CustomeEditTextView extends FrameLayout {
     private boolean hasErrStatus;
 
 
-    public CustomeEditTextView(@NonNull Context context) {
+    public YEditTextView(@NonNull Context context) {
         this(context, null);
     }
 
-    public CustomeEditTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public YEditTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CustomeEditTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YEditTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initXmlParams(context, attrs, defStyleAttr);
         initView(context);
@@ -65,14 +62,14 @@ public class CustomeEditTextView extends FrameLayout {
 
 
     private void initXmlParams(Context context, AttributeSet attrs, int defStyleAttr) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomeEditTextView, defStyleAttr, 0);
-        mErrStr = typedArray.getString(R.styleable.CustomeEditTextView_y_err_desc);
-        mHintStr = typedArray.getString(R.styleable.CustomeEditTextView_y_hint_desc);
-        mContentStr = typedArray.getString(R.styleable.CustomeEditTextView_y_content_desc);
-        mErrColor = typedArray.getColor(R.styleable.CustomeEditTextView_y_tv_err_color, Color.RED);
-        mLoseFocusColor = typedArray.getColor(R.styleable.CustomeEditTextView_y_lose_focus, Color.GRAY);
-        mGetFocusColor = typedArray.getColor(R.styleable.CustomeEditTextView_y_get_focus, Color.BLUE);
-        mEtContentColor = typedArray.getColor(R.styleable.CustomeEditTextView_y_et_content_color, Color.BLACK);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YEditTextView, defStyleAttr, 0);
+        mErrStr = typedArray.getString(R.styleable.YEditTextView_y_err_desc);
+        mHintStr = typedArray.getString(R.styleable.YEditTextView_y_hint_desc);
+        mContentStr = typedArray.getString(R.styleable.YEditTextView_y_content_desc);
+        mErrColor = typedArray.getColor(R.styleable.YEditTextView_y_tv_err_color, Color.RED);
+        mLoseFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_lose_focus, Color.GRAY);
+        mGetFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_get_focus, Color.BLUE);
+        mEtContentColor = typedArray.getColor(R.styleable.YEditTextView_y_et_content_color, Color.BLACK);
         typedArray.recycle();
     }
 
@@ -255,7 +252,7 @@ public class CustomeEditTextView extends FrameLayout {
 
     // SET 方法
     @BindingAdapter("y_content")
-    public static void setStr(CustomeEditTextView cetv, String content) {
+    public static void setStr(YEditTextView cetv, String content) {
         if (cetv != null) {
             String mCurrentStr = cetv.mEtContent.getText().toString().trim();
             if (!TextUtils.isEmpty(content)) {
@@ -270,13 +267,13 @@ public class CustomeEditTextView extends FrameLayout {
 
     // GET 方法
     @InverseBindingAdapter(attribute = "y_content", event = "contentAttrChanged")
-    public static String getStr(CustomeEditTextView cetv) {
+    public static String getStr(YEditTextView cetv) {
         return cetv.mEtContent.getText().toString().trim();
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
     @BindingAdapter(value = "contentAttrChanged")
-    public static void setChangeListener(CustomeEditTextView cetv, InverseBindingListener listener) {
+    public static void setChangeListener(YEditTextView cetv, InverseBindingListener listener) {
         cetv.mEtContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

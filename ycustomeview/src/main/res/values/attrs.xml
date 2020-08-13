@@ -20,7 +20,7 @@
     <!--            <enum name="centerInside" value="7" />-->
     <!--        </attr>-->
     <!--    </declare-styleable>-->
-    <declare-styleable name="CustomeEditTextView">
+    <declare-styleable name="YEditTextView">
         <attr name="y_hint_desc" format="string|reference" />
         <attr name="y_err_desc" format="string|reference" />
         <attr name="y_content_desc" format="string|reference" />

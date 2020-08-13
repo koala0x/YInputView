@@ -16,7 +16,7 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <com.yey.ycustomeview.CustomeEditTextView
+        <com.yey.ycustomeview.YEditTextView
             android:id="@+id/cetv_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -26,7 +26,7 @@
             app:y_hint_desc="提示" />
 
 
-        <com.yey.ycustomeview.CustomeEditTextView
+        <com.yey.ycustomeview.YEditTextView
             android:id="@+id/cetv_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
