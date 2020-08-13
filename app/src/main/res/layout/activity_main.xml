@@ -16,24 +16,41 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <com.yey.ycustomeview.YButtomView
+            android:id="@+id/ybtn_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_desc="牌照"
+            app:y_err_desc="错误"
+            app:y_err_status="@{mVM.mErrStatus}"
+            app:y_image_id="@drawable/kk" />
+
         <com.yey.ycustomeview.YEditTextView
             android:id="@+id/cetv_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            app:y_get_focus="@android:color/holo_orange_dark"
             app:y_content="@={mVM.mContentMLD1}"
             app:y_err_desc="错误"
+            app:y_err_status="@{mVM.mErrStatus}"
+            app:y_get_focus="@android:color/holo_orange_dark"
             app:y_hint_desc="提示" />
+
+        <com.yey.ycustomeview.YButtomView
+            android:id="@+id/ybtn_2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_desc="牌照2"
+            app:y_err_desc="错误2"
+            app:y_image_id="@drawable/kk" />
 
 
         <com.yey.ycustomeview.YEditTextView
             android:id="@+id/cetv_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:y_get_focus="@android:color/holo_purple"
             app:y_content="@={mVM.mContentMLD2}"
             app:y_err_desc="错误"
+            app:y_get_focus="@android:color/holo_purple"
             app:y_hint_desc="提示" />
 
 
@@ -54,5 +71,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="打印数据" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="让下一个控件获取焦点" />
     </LinearLayout>
 </layout>

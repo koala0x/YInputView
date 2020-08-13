@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--    <declare-styleable name="CustomeEditeTextView">-->
-    <!--        <attr name="point_size" format="dimension|reference" />-->
-    <!--        <attr name="point_bg" format="reference" />-->
-    <!--        <attr name="point_bottom_margin" format="dimension|reference" />-->
-    <!--        <attr name="desc_bottom_margin" format="dimension|reference" />-->
-    <!--        <attr name="banner_size_sclae" format="dimension|reference" />-->
-    <!--        <attr name="desc_color" format="color|reference" />-->
-    <!--        <attr name="desc_size" format="dimension|reference" />-->
-    <!--        <attr name="banner_interval" format="integer" />-->
-    <!--        <attr name="banner_im_scaletype">-->
-    <!--            <enum name="matrix" value="0" />-->
-    <!--            <enum name="fitXY" value="1" />-->
-    <!--            <enum name="fitStart" value="2" />-->
-    <!--            <enum name="fitCenter" value="3" />-->
-    <!--            <enum name="fitEnd" value="4" />-->
-    <!--            <enum name="center" value="5" />-->
-    <!--            <enum name="centerCrop" value="6" />-->
-    <!--            <enum name="centerInside" value="7" />-->
-    <!--        </attr>-->
-    <!--    </declare-styleable>-->
+    <!--        按钮文字内容-->
+    <attr name="y_content_desc" format="string|reference" />
+    <!--        按钮文字颜色-->
+    <attr name="y_et_content_color" format="color|reference" />
+    <!--        错误提示内容-->
+    <attr name="y_err_desc" format="string|reference" />
+    <!--        错误提示颜色-->
+    <attr name="y_tv_err_color" format="color|reference" />
+    <!--        失去焦点颜色-->
+    <attr name="y_lose_focus" format="color|reference" />
+    <!--        获取焦点颜色-->
+    <attr name="y_get_focus" format="color|reference" />
     <declare-styleable name="YEditTextView">
+        <!--        EditText中文字内容-->
+        <attr name="y_content_desc" />
+        <!--        EditText中文字颜色-->
+        <attr name="y_et_content_color" />
+        <!--        错误提示内容-->
+        <attr name="y_err_desc" />
+        <!--        错误提示颜色-->
+        <attr name="y_tv_err_color" />
+        <!--        失去焦点颜色-->
+        <attr name="y_lose_focus" />
+        <!--        获取焦点颜色-->
+        <attr name="y_get_focus" />
+        <!--        提示文字内容-->
         <attr name="y_hint_desc" format="string|reference" />
-        <attr name="y_err_desc" format="string|reference" />
-        <attr name="y_content_desc" format="string|reference" />
-        <attr name="y_lose_focus" format="color|reference" />
-        <attr name="y_get_focus" format="color|reference" />
-        <attr name="y_tv_err_color" format="color|reference" />
-        <attr name="y_et_content_color" format="color|reference" />
     </declare-styleable>
+    <declare-styleable name="YButtomView">
+        <!--        按钮文字内容-->
+        <attr name="y_content_desc" />
+        <!--        按钮文字颜色-->
+        <attr name="y_et_content_color" />
+        <!--        错误提示内容-->
+        <attr name="y_err_desc" />
+        <!--        错误提示颜色-->
+        <attr name="y_tv_err_color" />
+        <!--        失去焦点颜色-->
+        <attr name="y_lose_focus" />
+        <!--        获取焦点颜色-->
+        <attr name="y_get_focus" />
+        <!--        图片资源-->
+        <attr name="y_image_id" format="reference" />
+
+    </declare-styleable>
+
 </resources>

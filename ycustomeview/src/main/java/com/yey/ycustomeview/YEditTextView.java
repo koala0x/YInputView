@@ -20,6 +20,8 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
+// 双向绑定参考: https://www.jianshu.com/p/bd687e5b14c2
+// 双向绑定参考: https://blog.chrnie.com/2016/12/02/%E8%87%AA%E5%AE%9A%E4%B9%89-DataBinding-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7/
 // https://stackoverflow.com/a/34817565/7986616
 public class YEditTextView extends FrameLayout {
     private static final String TAG = "CustomeEditTextView 日志";
@@ -104,7 +106,6 @@ public class YEditTextView extends FrameLayout {
             mTvHint.setVisibility(View.VISIBLE);
         }
         mTvErr.setVisibility(View.INVISIBLE);
-
     }
 
 
@@ -272,7 +273,7 @@ public class YEditTextView extends FrameLayout {
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
-    @BindingAdapter(value = "contentAttrChanged")
+    @BindingAdapter(value = "contentAttrChanged", requireAll = false)
     public static void setChangeListener(YEditTextView cetv, InverseBindingListener listener) {
         cetv.mEtContent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -289,5 +290,17 @@ public class YEditTextView extends FrameLayout {
 
             }
         });
+    }
+
+    // 设置控件处于报错状态
+    @BindingAdapter("y_err_status")
+    public static void setErr(YEditTextView cetv, Boolean isErr) {
+        if (cetv != null) {
+            if (isErr) {
+                cetv.setErr();
+            } else {
+                cetv.clearErr();
+            }
+        }
     }
 }
