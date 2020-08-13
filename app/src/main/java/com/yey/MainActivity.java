@@ -7,7 +7,10 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -50,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.setMVM(myVM);
         myVM.mContentMLD1.setValue("1");
         myVM.mContentMLD2.setValue("2");
+        mainBinding.cetv1.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        // 设置一行
+        mainBinding.cetv1.getEditText().setSingleLine();
+        // 设置长度
+        mainBinding.cetv1.getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
+
         mainBinding.btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

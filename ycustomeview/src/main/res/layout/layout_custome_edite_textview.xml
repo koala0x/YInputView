@@ -25,7 +25,11 @@
         android:gravity="bottom"
         android:textColor="@android:color/black"
         android:textSize="14sp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:text="内容" />
+
+
 
     <View
         android:id="@+id/v_y_line"
@@ -34,8 +38,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:background="@color/yey_line"
-        android:focusable="true"
-        android:focusableInTouchMode="true" />
+         />
 
     <TextView
         android:id="@+id/tv_y_err"

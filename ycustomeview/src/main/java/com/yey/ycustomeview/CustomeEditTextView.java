@@ -12,6 +12,7 @@ import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -124,11 +125,13 @@ public class CustomeEditTextView extends FrameLayout {
                     // 2. TextView提示控件显示,文字色高亮,内容为XML中设置的提示文字
                     // 3. 分割线背景色高亮
                     mEtContent.setHint("");
+
                     mTvHint.setVisibility(VISIBLE);
                     mTvHint.setTextColor(mGetFocusColor);
                     mTvHint.setText(mHintStr);
                     mLineView.setBackgroundColor(mGetFocusColor);
                     // Log.e(TAG, "onFocusChange: ");
+
                 } else {
                     /**
                      * 失去焦点时候
@@ -189,6 +192,20 @@ public class CustomeEditTextView extends FrameLayout {
     }
 
     /**
+     * 获取EditText控件
+     */
+    public EditText getEditText() {
+        return mEtContent;
+    }
+
+    /**
+     * 为EditText控件添加内容改变监听
+     */
+    public void setTextChangedListener(TextWatcher textWatcher) {
+        mEtContent.addTextChangedListener(textWatcher);
+    }
+
+    /**
      * 显示错误信息
      */
     public void setErr() {
@@ -244,6 +261,8 @@ public class CustomeEditTextView extends FrameLayout {
             if (!TextUtils.isEmpty(content)) {
                 if (!content.equalsIgnoreCase(mCurrentStr)) {
                     cetv.mEtContent.setText(content);
+                    // 设置光标位置
+                    cetv.mEtContent.setSelection(content.length());
                 }
             }
         }
