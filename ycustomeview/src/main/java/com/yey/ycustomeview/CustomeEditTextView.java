@@ -96,34 +96,52 @@ public class CustomeEditTextView extends FrameLayout {
         mTvErr.setVisibility(View.INVISIBLE);
     }
 
-    /**
-     * 为EditText设置监听
-     */
+
     private void initListener() {
+        /**
+         * 为EditText设置焦点改变的监听
+         */
         mEtContent.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
                     // 获取焦点
-                    // Log.e(TAG, "onFocusChange: ");
+                    // 1. EditText hint提示取消
+                    // 2. TextView提示控件显示,文字色高亮,内容为XML中设置的提示文字
+                    // 3. 分割线背景色高亮
                     mEtContent.setHint("");
                     mTvHint.setVisibility(VISIBLE);
                     mTvHint.setTextColor(mGetFocusColor);
+                    mTvHint.setText(mHintStr);
                     mLineView.setBackgroundColor(mGetFocusColor);
+                    // Log.e(TAG, "onFocusChange: ");
                 } else {
-                    // 失去焦点时候
+                    /**
+                     * 失去焦点时候
+                     * 1. EditText中有内容
+                     *    a. TextView提示控件不隐藏,文字色置灰
+                     *    b. 分割线背景色置灰
+                     * 2. EditText中没有内容
+                     *    a. EditText hint提示显示
+                     *    b. TextView提示控件隐藏,清除该控件中的内容
+                     */
                     String mContentStr = mEtContent.getText().toString();
                     mTvHint.setTextColor(mLoseFocusColor);
                     mLineView.setBackgroundColor(mLoseFocusColor);
-                    if (TextUtils.isEmpty(mContentStr)) {
+                    if (TextUtils.isEmpty(mContentStr.trim())) {
                         // 如果没有输入数据
+                        mEtContent.setText("");
                         mEtContent.setHint(mHintStr);
                         mTvHint.setVisibility(INVISIBLE);
+                        mTvHint.setText("");
                     }
                 }
+
                 if (hasErrStatus) {
-                    // 错误状态
+                    // 如果处于错误状态
+                    // 1. TextView提示控件字体颜色显示错误色
+                    // 2. 分割线背景色显示错误色
                     mTvHint.setTextColor(mErrColor);
                     mLineView.setBackgroundColor(mErrColor);
                 }
@@ -132,12 +150,15 @@ public class CustomeEditTextView extends FrameLayout {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 点击控件及获取EditText焦点
+                // 点击整个控件为EditText获取焦点
                 mEtContent.requestFocus();
             }
         });
     }
 
+    /**
+     * 显示错误信息
+     */
     public void setErr() {
         if (!TextUtils.isEmpty(mErrStr)) {
             hasErrStatus = true;
@@ -145,13 +166,18 @@ public class CustomeEditTextView extends FrameLayout {
             setErrStatus();
         }
     }
-
+    /**
+     * 显示错误信息
+     */
     public void setErr(String err) {
         hasErrStatus = true;
         mTvErr.setText(err);
         setErrStatus();
     }
 
+    /**
+     * 清除错误信息
+     */
     public void clearErr() {
         hasErrStatus = false;
         mTvErr.setVisibility(View.INVISIBLE);
@@ -165,7 +191,7 @@ public class CustomeEditTextView extends FrameLayout {
     }
 
     /**
-     * 设置控件为Err状态
+     * 设置控件为错误状态
      */
     private void setErrStatus() {
         // Tv Err
