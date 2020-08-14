@@ -1,6 +1,9 @@
 package com.yey.ycustomeview.util;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -39,4 +42,29 @@ public class KeyboardUtils {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public static void showSoftInput(@NonNull final View view, final int flags) {
+        InputMethodManager imm =
+                (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        imm.showSoftInput(view, flags, new ResultReceiver(new Handler()) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == InputMethodManager.RESULT_UNCHANGED_HIDDEN
+                        || resultCode == InputMethodManager.RESULT_HIDDEN) {
+                    toggleSoftInput(view);
+                }
+            }
+        });
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    public static void toggleSoftInput(View view) {
+        InputMethodManager imm =
+                (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        imm.toggleSoftInput(0, 0);
+    }
 }

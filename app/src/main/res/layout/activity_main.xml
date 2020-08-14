@@ -31,9 +31,12 @@
             android:id="@+id/cetv_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:inputType="phone"
+            app:maxLength="3"
             app:y_content="@={mVM.mContentMLD1}"
             app:y_err_desc="错误"
             app:y_err_status="@{mVM.mErrStatus}"
+            app:y_notify_focus="@{mVM.mNotifyClick}"
             app:y_get_focus="@android:color/holo_orange_dark"
             app:y_hint_desc="提示" />
 
@@ -85,5 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="通知YButtomView点击事件" />
+
+
     </LinearLayout>
 </layout>

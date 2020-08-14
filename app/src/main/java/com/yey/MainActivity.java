@@ -99,11 +99,6 @@ public class MainActivity extends AppCompatActivity {
         myVM.mErrStatus.set(true);
         // 加载图片
 //        myVM.mLoadImageUrl.set("https://github.com/");
-        mainBinding.cetv1.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
-        // 设置长度
-        mainBinding.cetv1.getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-
-//        myVM.mNotifyClick.set(true);
 
         // 清除焦点
         // mainBinding.ybtn1.clearFocus();

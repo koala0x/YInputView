@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -20,6 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
+
+import com.yey.ycustomeview.util.KeyboardUtils;
 
 // 双向绑定参考: https://www.jianshu.com/p/bd687e5b14c2
 // 双向绑定参考: https://blog.chrnie.com/2016/12/02/%E8%87%AA%E5%AE%9A%E4%B9%89-DataBinding-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7/
@@ -46,7 +49,10 @@ public class YEditTextView extends FrameLayout {
 
     // 是否是错误状态
     private boolean hasErrStatus;
-
+    // 输入类型
+    private int mInputType;
+    // 输入内容长度
+    private int mMaxLength;
 
     public YEditTextView(@NonNull Context context) {
         this(context, null);
@@ -73,6 +79,8 @@ public class YEditTextView extends FrameLayout {
         mLoseFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_lose_focus, Color.GRAY);
         mGetFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_get_focus, Color.BLUE);
         mEtContentColor = typedArray.getColor(R.styleable.YEditTextView_y_et_content_color, Color.BLACK);
+        mInputType = typedArray.getInt(R.styleable.YEditTextView_inputType, EditorInfo.TYPE_CLASS_TEXT);
+        mMaxLength = typedArray.getInt(R.styleable.YEditTextView_maxLength, 0);
         typedArray.recycle();
     }
 
@@ -87,6 +95,10 @@ public class YEditTextView extends FrameLayout {
         mEtContent.setHintTextColor(mLoseFocusColor);
         if (TextUtils.isEmpty(mContentStr)) {
             mEtContent.setHint(mHintStr);
+        }
+        mEtContent.setInputType(mInputType);
+        if (mMaxLength > 0) {
+            mEtContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mMaxLength)});
         }
 
         mTvHint = (TextView) findViewById(R.id.tv_y_hint);
@@ -130,6 +142,7 @@ public class YEditTextView extends FrameLayout {
                     mTvHint.setText(mHintStr);
                     mLineView.setBackgroundColor(mGetFocusColor);
                     // Log.e(TAG, "onFocusChange: ");
+                    KeyboardUtils.showSoftInput(mEtContent, 0);
 
                 } else {
                     /**
@@ -152,6 +165,7 @@ public class YEditTextView extends FrameLayout {
                         mTvHint.setVisibility(INVISIBLE);
                         mTvHint.setText("");
                     }
+                    KeyboardUtils.hideSoftInput(mEtContent);
                 }
 
                 if (hasErrStatus) {
@@ -329,5 +343,22 @@ public class YEditTextView extends FrameLayout {
      */
     public void setKeyboardNextListener(KeyboardNextListener keyboardNextListener) {
         mKeyboardNextListener = keyboardNextListener;
+    }
+
+
+    /**
+     * 通知YEditTextView是否该失去焦点或者主动获取焦点
+     */
+    @BindingAdapter("y_notify_focus")
+    public static void notifyFocus(YEditTextView yetv, Boolean isFocus) {
+        if (yetv != null && isFocus != null) {
+            if (isFocus) {
+                // 获取焦点
+                yetv.mEtContent.requestFocus();
+            } else {
+                // 失去焦点
+                yetv.mEtContent.clearFocus();
+            }
+        }
     }
 }
