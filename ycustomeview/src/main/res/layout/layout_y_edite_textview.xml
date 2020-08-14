@@ -15,7 +15,7 @@
         android:gravity="center_vertical"
         android:textSize="10sp"
         tools:text="提示" />
-
+    <!--    EditText设置单行并且设置imeOptions="actionNext"是为了键盘右下角按钮为下一步按钮-->
     <EditText
         android:id="@+id/et_y_content"
         android:layout_width="match_parent"
@@ -28,6 +28,8 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="bottom"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         tools:text="内容" />

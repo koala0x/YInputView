@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -169,7 +170,6 @@ public class YEditTextView extends FrameLayout {
                 mEtContent.requestFocus();
             }
         });
-        mEtContent.setInputType(InputType.TYPE_CLASS_TEXT);
         mEtContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -185,6 +185,16 @@ public class YEditTextView extends FrameLayout {
                 if (!TextUtils.isEmpty(mStr)) {
                     mTvHint.setVisibility(VISIBLE);
                 }
+            }
+        });
+        mEtContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT && mKeyboardNextListener != null) {
+                    // 用户点击了键盘的下一步按钮
+                    mKeyboardNextListener.nextEvent();
+                }
+                return false;
             }
         });
     }
@@ -304,4 +314,20 @@ public class YEditTextView extends FrameLayout {
         }
     }
 
+    /**
+     * 监听YEditTextView的下一步键盘点击事件
+     */
+    public interface KeyboardNextListener {
+        void nextEvent();
+    }
+
+    // 下一步键盘点击事件
+    private KeyboardNextListener mKeyboardNextListener;
+
+    /**
+     * 设置监听
+     */
+    public void setKeyboardNextListener(KeyboardNextListener keyboardNextListener) {
+        mKeyboardNextListener = keyboardNextListener;
+    }
 }

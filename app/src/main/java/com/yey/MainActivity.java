@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yey.databinding.ActivityMainBinding;
 import com.yey.ycustomeview.YButtomView;
+import com.yey.ycustomeview.YEditTextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
         // 加载图片
 //        myVM.mLoadImageUrl.set("https://github.com/");
         mainBinding.cetv1.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
-        // 设置一行
-        mainBinding.cetv1.getEditText().setSingleLine();
         // 设置长度
         mainBinding.cetv1.getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
 
@@ -130,5 +132,20 @@ public class MainActivity extends AppCompatActivity {
                 myVM.mLoadImageUrl.set("https://github.com/");
             }
         });
+
+        mainBinding.cetv1.setKeyboardNextListener(new YEditTextView.KeyboardNextListener() {
+            @Override
+            public void nextEvent() {
+                Log.e(TAG, "cetv1 用户点击了下一步按钮");
+            }
+        });
+
+        mainBinding.cetv2.setKeyboardNextListener(new YEditTextView.KeyboardNextListener() {
+            @Override
+            public void nextEvent() {
+                Log.e(TAG, "cetv2 用户点击了下一步按钮");
+            }
+        });
+
     }
 }
