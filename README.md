@@ -2,6 +2,7 @@
 > 最近接手的项目输入控件需求较特殊,我花时间自己写了两个组合控件,比较有特色一点是用`BindingAdapter`,实现了双向绑定.想了解双向绑定可以看代码中的实现或者这篇[文章](https://blog.csdn.net/MoLiao2046/article/details/107977255)
 #### 属性介绍
 - 公共属性
+
 |属性   |   解释   |
 |-------|--------|
 |y_content_desc|控件的文字内容|
@@ -11,7 +12,9 @@
 |y_lose_focus|控件失去焦点的颜色|
 |y_get_focus|控件获取焦点的颜色|
 |y_err_status|实现单向绑定数据,动态展示错误信息|
+
 - `YEditTextView`控件特有属性
+
 |属性   |   解释   |
 |-------|--------|
 |y_hint_desc|控件正常提示文字内容|
@@ -19,7 +22,9 @@
 |y_notify_focus|通过`LiveData`动态实现控件主动获取焦点和失去焦点|
 |maxLength|控件能够输入的最大内容长度|
 |inputType|控件输入内容的类型,如:NUMBER,TEXT,PHONE|
+
 - `YButtomView`控件特有属性
+
 |属性   |   解释   |
 |-------|--------|
 |y_image_id|手动设置控件图片资源id|
