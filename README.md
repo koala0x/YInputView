@@ -53,8 +53,10 @@ implementation 'com.yey:ycustomeview:1.0.3'
     app:y_get_focus="@android:color/holo_orange_dark"
     app:y_hint_desc="提示" />
 ```
-    1. `app:y_content="@={mVM.mContentMLD1}"`和`app:y_err_status="@{mVM.mErrStatus}"`使用`DataBinding`进行数据绑定.
-    2. `app:y_notify_focus="@{mVM.mNotifyClick}"`通过`ObservableField<Boolean>`动态实现获取焦点失去焦点
+
+1. `app:y_content="@={mVM.mContentMLD1}"`和`app:y_err_status="@{mVM.mErrStatus}"`使用`DataBinding`进行数据绑定.
+2. `app:y_notify_focus="@{mVM.mNotifyClick}"`通过`ObservableField<Boolean>`动态实现获取焦点失去焦点
+
 - 代码使用
 ```java
 // ViewModel.java
@@ -111,8 +113,10 @@ YEditTextView.clearErr()
     app:y_image_url="@{mVM.mLoadImageUrl}"
     app:y_image_id="@drawable/kk"/>
 ```
-    1. `app:y_err_status="@{mVM.mErrStatus}"`和`app:y_image_url="@{mVM.mLoadImageUrl}"`使用`DataBinding`进行数据绑定,可以动态的更新`YButtomView`的错误提示和图片.
-    2. app:y_notify_focus="@{mVM.mNotifyClick}"通过`ObservableField<Boolean>`动态实现获取焦点失去焦点,获取焦点时候能发出一个回调事件.
+
+1. `app:y_err_status="@{mVM.mErrStatus}"`和`app:y_image_url="@{mVM.mLoadImageUrl}"`使用`DataBinding`进行数据绑定,可以动态的更新`YButtomView`的错误提示和图片.
+2. app:y_notify_focus="@{mVM.mNotifyClick}"通过`ObservableField<Boolean>`动态实现获取焦点失去焦点,获取焦点时候能发出一个回调事件.
+
 - 代码使用
 ```java
 // ViewModel.java
