@@ -112,10 +112,10 @@ public class YButtomView extends FrameLayout {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
                     mLineView.setBackgroundColor(mGetFocusColor);
-                    if (mYClickListener != null) {
-                        // 点击回调
-                        mYClickListener.onClick(true);
-                    }
+//                    if (mYClickListener != null) {
+//                        // 点击回调
+//                        mYClickListener.onClick(true);
+//                    }
                     KeyboardUtils.hideSoftInput(YButtomView.this);
                 } else {
                     mLineView.setBackgroundColor(mLoseFocusColor);
@@ -131,8 +131,8 @@ public class YButtomView extends FrameLayout {
 
     public interface YClickListener {
         /**
-         * @param isFocus true 获取焦点时候调用
-         *                false 点击时候调用
+         * @param isFocus true 通过LiveData通知的点击
+         *                false 通过用户手动点击的事件
          */
         void onClick(boolean isFocus);
     }
@@ -229,5 +229,22 @@ public class YButtomView extends FrameLayout {
      */
     public void setYLoadImageListener(YLoadImageListener yLoadImageListener) {
         mYLoadImageListener = yLoadImageListener;
+    }
+
+    /**
+     * 通知YBottomView执行点击回调和是否应该失去焦点
+     */
+    @BindingAdapter("y_notify_click_focus")
+    public static void notifyClickAndFocus(YButtomView ybv, Boolean isClickAndfocus) {
+        if (ybv != null && isClickAndfocus != null && ybv.mYClickListener != null) {
+            if (isClickAndfocus) {
+                ybv.mYClickListener.onClick(true);
+                // 获取焦点
+                ybv.requestFocus();
+            } else {
+                // 失去焦点
+                ybv.clearFocus();
+            }
+        }
     }
 }

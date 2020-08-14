@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(boolean isFocus) {
                 if (isFocus) {
-                    Log.e(TAG, "ybtn1 获取焦点时候调用");
+                    Log.e(TAG, "ybtn1 LiveData通知的回调");
                 } else {
                     Log.e(TAG, "ybtn1 点击时候调用");
                 }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(boolean isFocus) {
                 if (isFocus) {
-                    Log.e(TAG, "ybtn2 获取焦点时候调用");
+                    Log.e(TAG, "ybtn2 LiveData通知的回调");
                 } else {
                     Log.e(TAG, "ybtn2 点击时候调用");
                 }
@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.ybtn1.setYLoadImageListener(new YButtomView.YLoadImageListener() {
             @Override
             public void loadHtpp(ImageView imageView, String url) {
-                Log.e(TAG, "网络加载"+url);
+                Log.e(TAG, "网络加载" + url);
             }
 
             @Override
             public void loadLocal(ImageView imageView, String url) {
-                Log.e(TAG, "本地加载"+url);
+                Log.e(TAG, "本地加载" + url);
             }
         });
 
@@ -89,17 +89,23 @@ public class MainActivity extends AppCompatActivity {
         // MutableLiveData 双向绑定
         myVM = new ViewModelProvider(this).get(MyVM.class);
         mainBinding.setMVM(myVM);
-        myVM.mContentMLD1.setValue("1");
-        myVM.mContentMLD2.setValue("2");
+        myVM.mContentMLD1.set("1");
+        myVM.mContentMLD2.set("2");
         // 报错提示
-        myVM.mErrStatus.setValue(true);
+        myVM.mErrStatus.set(true);
         // 加载图片
-        myVM.mLoadImageUrl.setValue("https://github.com/");
+//        myVM.mLoadImageUrl.set("https://github.com/");
         mainBinding.cetv1.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         // 设置一行
         mainBinding.cetv1.getEditText().setSingleLine();
         // 设置长度
         mainBinding.cetv1.getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
+
+//        myVM.mNotifyClick.set(true);
+
+        // 清除焦点
+        // mainBinding.ybtn1.clearFocus();
+
         // 让下一个控件获取焦点
         mainBinding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +118,17 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, myVM.mContentMLD1.getValue() + " " + myVM.mContentMLD2.getValue(), Toast.LENGTH_LONG).show();
+
+                Toast.makeText(MainActivity.this, myVM.mContentMLD1.get() + " " + myVM.mContentMLD2.get(), Toast.LENGTH_LONG).show();
             }
         });
 
-
+        mainBinding.btnNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myVM.mNotifyClick.set(!myVM.mNotifyClick.get().booleanValue());
+                myVM.mLoadImageUrl.set("https://github.com/");
+            }
+        });
     }
 }

@@ -303,4 +303,5 @@ public class YEditTextView extends FrameLayout {
             }
         }
     }
+
 }
