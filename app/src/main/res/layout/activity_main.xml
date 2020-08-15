@@ -15,18 +15,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
-
-        <com.yey.ycustomeview.YButtomView
-            android:id="@+id/ybtn_1"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:y_content_desc="牌照"
-            app:y_err_desc="错误"
-            app:y_err_status="@{mVM.mErrStatus}"
-            app:y_image_id="@drawable/kk"
-            app:y_image_url="@{mVM.mLoadImageUrl}"
-            app:y_notify_click_focus="@{mVM.mNotifyClick}" />
-
         <com.yey.ycustomeview.YEditTextView
             android:id="@+id/cetv_1"
             android:layout_width="match_parent"
@@ -39,6 +27,19 @@
             app:y_notify_focus="@{mVM.mNotifyClick}"
             app:y_get_focus="@android:color/holo_orange_dark"
             app:y_hint_desc="提示" />
+
+
+        <com.yey.ycustomeview.YButtomView
+            android:id="@+id/ybtn_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_desc="牌照"
+            app:y_err_desc="错误"
+            app:y_err_status="@{mVM.mErrStatus}"
+            app:y_image_id="@drawable/kk"
+            app:y_image_url="@{mVM.mLoadImageUrl}"
+            app:y_notify_click_focus="@{mVM.mNotifyClick}" />
+
 
         <com.yey.ycustomeview.YButtomView
             android:id="@+id/ybtn_2"

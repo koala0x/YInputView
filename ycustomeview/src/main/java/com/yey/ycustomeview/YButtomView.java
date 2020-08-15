@@ -96,14 +96,14 @@ public class YButtomView extends FrameLayout {
     }
 
     private void initListener() {
-        this.setOnClickListener(new OnClickListener() {
+        this.getChildAt(0).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                YButtomView.this.requestFocus();
                 if (mYClickListener != null) {
                     // 点击回调
                     mYClickListener.onClick(false);
                 }
+                YButtomView.this.requestFocus();
             }
         });
         this.setOnFocusChangeListener(new OnFocusChangeListener() {

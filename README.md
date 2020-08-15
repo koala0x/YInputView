@@ -32,7 +32,7 @@
 |y_notify_click_focus|通过`LiveData`动态实现控件获取焦点失去焦点,并且获取焦点的时候会进行事件回调|
 #### 依赖
 ```groovy
-implementation 'com.yey:ycustomeview:1.0.3'
+implementation 'com.yey:ycustomeview:1.0.4'
 ```
 #### `YEditTextView`简单使用
 - XML

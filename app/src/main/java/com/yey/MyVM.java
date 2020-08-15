@@ -3,6 +3,7 @@ package com.yey;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 // https://stackoverflow.com/a/48194074/7986616
 public class MyVM extends ViewModel {
     public ObservableField<String> mContentMLD1;
@@ -14,9 +15,9 @@ public class MyVM extends ViewModel {
     public MyVM() {
         mContentMLD1 = new ObservableField<>();
         mContentMLD2 = new ObservableField<>();
-        mErrStatus = new ObservableField<>();
         mLoadImageUrl = new ObservableField<>();
-        mNotifyClick = new ObservableField<>(false);
+        mErrStatus = new ObservableField<>(false);
+        mNotifyClick = new ObservableField<>();
 
     }
 }

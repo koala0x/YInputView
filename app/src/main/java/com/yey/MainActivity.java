@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         myVM.mContentMLD1.set("1");
         myVM.mContentMLD2.set("2");
         // 报错提示
-        myVM.mErrStatus.set(true);
+//        myVM.mErrStatus.set(true);
         // 加载图片
 //        myVM.mLoadImageUrl.set("https://github.com/");
 
