@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mVM"
+            type="com.yey.vm.YEditTextViewVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".YEditTextViewActivity">
+
+        <com.yey.ycustomeview.YEditTextView
+            android:id="@+id/cetv_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:inputType="phone"
+            app:maxLength="3"
+            app:y_content="@={mVM.mContentMLD1}"
+            app:y_err_desc="错误"
+            app:y_err_status="@{mVM.mErrStatus}"
+            app:y_get_focus="@android:color/holo_orange_dark"
+            app:y_hint_desc="提示"
+            app:y_notify_focus="@{mVM.mNotifyFocus}" />
+
+
+        <com.yey.ycustomeview.YEditTextView
+            android:id="@+id/cetv_2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content="@={mVM.mContentMLD2}"
+            app:y_err_desc="错误"
+            app:y_get_focus="@android:color/holo_purple"
+            app:y_hint_desc="提示" />
+
+        <Button
+            android:id="@+id/btn_show_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示错误" />
+
+        <Button
+            android:id="@+id/btn_hide_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐藏错误" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="让下一个控件获取焦点" />
+
+        <Button
+            android:id="@+id/btn_get_focus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主动获取焦点" />
+
+        <Button
+            android:id="@+id/btn_print_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打印数据" />
+    </LinearLayout>
+</layout>

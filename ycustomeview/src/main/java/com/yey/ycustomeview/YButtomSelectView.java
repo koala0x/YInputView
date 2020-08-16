@@ -17,7 +17,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.yey.ycustomeview.util.KeyboardUtils;
 
-public class YButtomView extends FrameLayout {
+public class YButtomSelectView extends FrameLayout {
     private static String mContentStr;
     private int mContentColor;
     private String mErrStr;
@@ -27,6 +27,7 @@ public class YButtomView extends FrameLayout {
     // 获取焦点时候提示颜色
     private int mGetFocusColor;
     private TextView mTvContent;
+    private TextView mTvHint;
     private TextView mTvErr;
     private View mLineView;
     private ImageView mIvImage;
@@ -37,15 +38,15 @@ public class YButtomView extends FrameLayout {
     private boolean hasErrStatus;
     private boolean etHasFocus;
 
-    public YButtomView(@NonNull Context context) {
+    public YButtomSelectView(@NonNull Context context) {
         this(context, null);
     }
 
-    public YButtomView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public YButtomSelectView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YButtomView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YButtomSelectView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initXmlParams(context, attrs, defStyleAttr);
         initView(context);
@@ -74,10 +75,14 @@ public class YButtomView extends FrameLayout {
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
         this.setClickable(true);
-        LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this);
+        LayoutInflater.from(context).inflate(R.layout.layout_y_buttom_select_view, this);
         mTvContent = (TextView) findViewById(R.id.tv_y_content);
         mTvContent.setText(mContentStr);
         mTvContent.setTextColor(mContentColor);
+
+        mTvHint = (TextView) findViewById(R.id.tv_y_hint);
+        mTvHint.setText(mContentStr);
+        mTvHint.setTextColor(mLoseFocusColor);
 
         mTvErr = (TextView) findViewById(R.id.tv_y_err);
         mTvErr.setText(mErrStr);
@@ -103,7 +108,7 @@ public class YButtomView extends FrameLayout {
                     // 点击回调
                     mYClickListener.onClick(false);
                 }
-                YButtomView.this.requestFocus();
+                YButtomSelectView.this.requestFocus();
             }
         });
         this.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -117,7 +122,7 @@ public class YButtomView extends FrameLayout {
 //                        // 点击回调
 //                        mYClickListener.onClick(true);
 //                    }
-                    KeyboardUtils.hideSoftInput(YButtomView.this);
+                    KeyboardUtils.hideSoftInput(YButtomSelectView.this);
                 } else {
                     mLineView.setBackgroundColor(mLoseFocusColor);
                     mTvContent.setTextColor(mLoseFocusColor);
@@ -200,7 +205,7 @@ public class YButtomView extends FrameLayout {
 
     // 为ImageView加载图片
     @BindingAdapter("y_image_url")
-    public static void setImageURL(YButtomView ybv, String url) {
+    public static void setImageURL(YButtomSelectView ybv, String url) {
         if (ybv != null && url != null && ybv.mYLoadImageListener != null) {
             if (url.startsWith("http")) {
                 // 通过网络加载图片
@@ -239,7 +244,7 @@ public class YButtomView extends FrameLayout {
      * 通知YBottomView执行点击回调和是否应该失去焦点
      */
     @BindingAdapter("y_notify_click_focus")
-    public static void notifyClickAndFocus(YButtomView ybv, Boolean isClickAndfocus) {
+    public static void notifyClickAndFocus(YButtomSelectView ybv, Boolean isClickAndfocus) {
         if (ybv != null && isClickAndfocus != null && ybv.mYClickListener != null) {
             if (isClickAndfocus) {
                 ybv.mYClickListener.onClick(true);

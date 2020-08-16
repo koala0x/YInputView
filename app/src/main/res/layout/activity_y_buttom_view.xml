@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mVM"
+            type="com.yey.vm.YButtomViewVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".YButtomViewActivity">
+
+        <com.yey.ycustomeview.YButtomView
+            android:id="@+id/ybtn_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_desc="牌照"
+            app:y_err_desc="错误"
+            app:y_err_status="@{mVM.mErrStatus}"
+            app:y_image_id="@drawable/kk"
+            app:y_image_url="@{mVM.mLoadImageUrl}"
+            app:y_notify_click_focus="@{mVM.mNotifyClickAndFocus}" />
+
+
+        <com.yey.ycustomeview.YButtomView
+            android:id="@+id/ybtn_2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_desc="牌照2"
+            app:y_err_desc="错误2"
+            app:y_image_id="@drawable/kk" />
+
+        <Button
+            android:id="@+id/btn_show_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示错误" />
+
+        <Button
+            android:id="@+id/btn_hide_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐藏错误" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="让下一个控件获取焦点" />
+
+        <Button
+            android:id="@+id/btn_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通知YButtomView点击事件" />
+        <Button
+            android:id="@+id/btn_load_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通知更新图片" />
+    </LinearLayout>
+</layout>

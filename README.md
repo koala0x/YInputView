@@ -40,7 +40,7 @@ implementation 'com.yey:ycustomeview:1.0.4'
 <data>
     <variable
         name="mVM"
-        type="com.yey.MyVM" />
+        type="com.yey.vm.MyVM" />
 </data>
 <com.yey.ycustomeview.YEditTextView
     android:id="@+id/cetv_1"
@@ -100,7 +100,7 @@ YEditTextView.clearErr()
 <data>
     <variable
         name="mVM"
-        type="com.yey.MyVM" />
+        type="com.yey.vm.MyVM" />
 </data>
 <com.yey.ycustomeview.YButtomView
     android:id="@+id/ybtn_1"

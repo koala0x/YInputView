@@ -4,143 +4,48 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yey.databinding.ActivityMainBinding;
+import com.yey.vm.MyVM;
 import com.yey.ycustomeview.YButtomView;
 import com.yey.ycustomeview.YEditTextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity.class";
-    ActivityMainBinding mainBinding;
-    private MyVM myVM;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainBinding = (ActivityMainBinding) DataBindingUtil.setContentView(this, R.layout.activity_main);
-        setContentView(mainBinding.getRoot());
-
-        mainBinding.btn.setOnClickListener(new View.OnClickListener() {
+        binding = (ActivityMainBinding) DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView(binding.getRoot());
+        binding.btnYbuttomview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainBinding.cetv1.setErr();
-                mainBinding.cetv2.setErr();
-                mainBinding.ybtn1.setErr();
-                mainBinding.ybtn2.setErr();
+                Intent intent = new Intent(MainActivity.this, YButtomViewActivity.class);
+                startActivity(intent);
             }
         });
-
-        mainBinding.btnLose.setOnClickListener(new View.OnClickListener() {
+        binding.btnYedittextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainBinding.cetv1.clearErr();
-                mainBinding.cetv2.clearErr();
-                mainBinding.ybtn1.clearErr();
-                mainBinding.ybtn2.clearErr();
+                Intent intent = new Intent(MainActivity.this, YEditTextViewActivity.class);
+                startActivity(intent);
             }
         });
-
-        mainBinding.ybtn1.setYClickListener(new YButtomView.YClickListener() {
-            @Override
-            public void onClick(boolean isFocus) {
-                if (isFocus) {
-                    Log.e(TAG, "ybtn1 LiveData通知的回调");
-                } else {
-                    Log.e(TAG, "ybtn1 点击时候调用");
-                }
-            }
-        });
-        mainBinding.ybtn2.setYClickListener(new YButtomView.YClickListener() {
-            @Override
-            public void onClick(boolean isFocus) {
-                if (isFocus) {
-                    Log.e(TAG, "ybtn2 LiveData通知的回调");
-                } else {
-                    Log.e(TAG, "ybtn2 点击时候调用");
-                }
-            }
-        });
-
-        mainBinding.ybtn1.setYLoadImageListener(new YButtomView.YLoadImageListener() {
-            @Override
-            public void loadHtpp(ImageView imageView, String url) {
-                Log.e(TAG, "网络加载" + url);
-            }
-
-            @Override
-            public void loadLocal(ImageView imageView, String url) {
-                Log.e(TAG, "本地加载" + url);
-            }
-        });
-
-
-        initVM();
-    }
-
-
-    private void initVM() {
-        // MutableLiveData 双向绑定
-        myVM = new ViewModelProvider(this).get(MyVM.class);
-        mainBinding.setMVM(myVM);
-        myVM.mContentMLD1.set("1");
-        myVM.mContentMLD2.set("2");
-        // 报错提示
-//        myVM.mErrStatus.set(true);
-        // 加载图片
-//        myVM.mLoadImageUrl.set("https://github.com/");
-
-        // 清除焦点
-        // mainBinding.ybtn1.clearFocus();
-
-        // 让下一个控件获取焦点
-        mainBinding.btnNext.setOnClickListener(new View.OnClickListener() {
+        binding.btnYbuttomselectview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainBinding.cetv1.requestFocus();
+                Intent intent = new Intent(MainActivity.this, YButtomSelectViewActivity.class);
+                startActivity(intent);
             }
         });
-
-
-        mainBinding.btnPrint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(MainActivity.this, myVM.mContentMLD1.get() + " " + myVM.mContentMLD2.get(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        mainBinding.btnNotify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myVM.mNotifyClick.set(!myVM.mNotifyClick.get().booleanValue());
-                myVM.mLoadImageUrl.set("https://github.com/");
-            }
-        });
-
-        mainBinding.cetv1.setKeyboardNextListener(new YEditTextView.KeyboardNextListener() {
-            @Override
-            public void nextEvent() {
-                Log.e(TAG, "cetv1 用户点击了下一步按钮");
-            }
-        });
-
-        mainBinding.cetv2.setKeyboardNextListener(new YEditTextView.KeyboardNextListener() {
-            @Override
-            public void nextEvent() {
-                Log.e(TAG, "cetv2 用户点击了下一步按钮");
-            }
-        });
-
     }
 }
