@@ -131,6 +131,9 @@ public class YEditTextView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
+                    if (mFocusChangeListener != null) {
+                        mFocusChangeListener.change(true);
+                    }
                     // 获取焦点
                     // 1. EditText hint提示取消
                     // 2. TextView提示控件显示,文字色高亮,内容为XML中设置的提示文字
@@ -145,6 +148,9 @@ public class YEditTextView extends FrameLayout {
                     KeyboardUtils.showSoftInput(mEtContent, 0);
 
                 } else {
+                    if (mFocusChangeListener != null) {
+                        mFocusChangeListener.change(false);
+                    }
                     /**
                      * 失去焦点时候
                      * 1. EditText中有内容
@@ -263,6 +269,13 @@ public class YEditTextView extends FrameLayout {
     }
 
     /**
+     * 控件当前是否获取焦点
+     */
+    public boolean getFocusStatus() {
+        return etHasFocus;
+    }
+
+    /**
      * 设置控件为错误状态
      */
     private void setErrStatus() {
@@ -345,13 +358,24 @@ public class YEditTextView extends FrameLayout {
         mKeyboardNextListener = keyboardNextListener;
     }
 
+    // 监听当前控件是否获取焦点
+    private interface IFocusChangeListener {
+        void change(boolean isFocus);
+    }
+
+    private IFocusChangeListener mFocusChangeListener;
+
+    public void setIFocusChangeListener(IFocusChangeListener iFocusChangeListener) {
+        mFocusChangeListener = iFocusChangeListener;
+    }
+
 
     /**
      * 通知YEditTextView是否该失去焦点或者主动获取焦点
      */
     @BindingAdapter("y_notify_focus")
-    public static void notifyFocus(YEditTextView yetv, Boolean isFocus) {
-        if (yetv != null && isFocus != null) {
+    public static void setNotifyFocus(YEditTextView yetv, Boolean isFocus) {
+        if (yetv != null && isFocus != null && isFocus != etHasFocus) {
             if (isFocus) {
                 // 获取焦点
                 yetv.mEtContent.requestFocus();
@@ -361,4 +385,23 @@ public class YEditTextView extends FrameLayout {
             }
         }
     }
+
+    // GET 方法
+    @InverseBindingAdapter(attribute = "y_notify_focus", event = "FocusAttrChanged")
+    public static Boolean getNotifyFocus(YEditTextView cetv) {
+        boolean focusStatus = cetv.getFocusStatus();
+        return focusStatus;
+    }
+
+    // 监听,如果有变动就调用listener中的onChange方法
+    @BindingAdapter(value = "FocusAttrChanged", requireAll = false)
+    public static void NotifyFocus(YEditTextView cetv, InverseBindingListener listener) {
+        cetv.setIFocusChangeListener(new IFocusChangeListener() {
+            @Override
+            public void change(boolean isFocus) {
+                listener.onChange();
+            }
+        });
+    }
+
 }

@@ -12,9 +12,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yey.databinding.ActivityMainBinding;
-import com.yey.vm.MyVM;
-import com.yey.ycustomeview.YButtomView;
-import com.yey.ycustomeview.YEditTextView;
 
 public class MainActivity extends AppCompatActivity {
 

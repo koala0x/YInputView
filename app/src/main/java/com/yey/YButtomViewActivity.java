@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.yey.databinding.ActivityYButtomViewBinding;
 import com.yey.vm.YButtomViewVM;
@@ -45,14 +46,14 @@ public class YButtomViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 失去焦点
-                mVM.mNotifyClickAndFocus.set(false);
+                mVM.mNotifyClickAndFocus.set(!mVM.mNotifyClickAndFocus.get().booleanValue());
             }
         });
         binding.btnNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 用LiveData 通知YButtomView 点击事件
-                mVM.mNotifyClickAndFocus.set(true);
+                mVM.mNotifyClickAndFocus.set(!mVM.mNotifyClickAndFocus.get().booleanValue());
             }
         });
         // 点击回调
@@ -79,6 +80,36 @@ public class YButtomViewActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        binding.ybtn1.setYLoadImageListener(new YButtomView.YLoadImageListener() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void loadHtpp(ImageView imageView, String url) {
+                Log.e(TAG1, "ybtn1 网络加载" + url);
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void loadLocal(ImageView imageView, String url) {
+                Log.e(TAG1, "ybtn1 本地加载" + url);
+            }
+        });
+
+        binding.ybtn2.setYLoadImageListener(new YButtomView.YLoadImageListener() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void loadHtpp(ImageView imageView, String url) {
+                Log.e(TAG1, "ybtn2 网络加载" + url);
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void loadLocal(ImageView imageView, String url) {
+                Log.e(TAG1, "ybtn2 本地加载" + url);
+            }
+        });
+
         // 通知更新图片
         binding.btnLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override

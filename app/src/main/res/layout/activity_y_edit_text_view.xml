@@ -27,7 +27,7 @@
             app:y_err_status="@{mVM.mErrStatus}"
             app:y_get_focus="@android:color/holo_orange_dark"
             app:y_hint_desc="提示"
-            app:y_notify_focus="@{mVM.mNotifyFocus}" />
+            app:y_notify_focus="@={mVM.mNotifyFocus}" />
 
 
         <com.yey.ycustomeview.YEditTextView

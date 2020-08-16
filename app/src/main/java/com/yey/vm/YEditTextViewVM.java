@@ -14,7 +14,7 @@ public class YEditTextViewVM extends ViewModel {
         mContentMLD1 = new ObservableField<>();
         mContentMLD2 = new ObservableField<>();
         mErrStatus = new ObservableField<>(false);
-        mNotifyFocus = new ObservableField<>();
+        mNotifyFocus = new ObservableField<>(false);
 
     }
 }

@@ -12,7 +12,7 @@ public class YButtomViewVM extends ViewModel {
     public YButtomViewVM() {
         mLoadImageUrl = new ObservableField<>();
         mErrStatus = new ObservableField<>(false);
-        mNotifyClickAndFocus = new ObservableField<>();
+        mNotifyClickAndFocus = new ObservableField<>(false);
 
     }
 }
