@@ -12,7 +12,8 @@
     <attr name="y_lose_focus" format="color|reference" />
     <!--        获取焦点颜色-->
     <attr name="y_get_focus" format="color|reference" />
-
+    <!--        图片大小-->
+    <attr name="image_size" format="dimension|reference" />
     <declare-styleable name="YEditTextView">
         <!--        EditText中文字内容-->
         <attr name="y_content_desc" />
@@ -185,6 +186,8 @@
         <attr name="y_get_focus" />
         <!--        图片资源-->
         <attr name="y_image_id" />
+        <!--        图片大小-->
+        <attr name="image_size" />
     </declare-styleable>
 
 
@@ -204,9 +207,11 @@
         <!--        图片资源-->
         <attr name="y_image_id" />
 
+        <!--        内容改变之后,TextView 字体颜色-->
         <attr name="y_content_change_color" format="color|reference" />
 
-
+        <!--        图片大小-->
+        <attr name="image_size" />
     </declare-styleable>
 
 </resources>

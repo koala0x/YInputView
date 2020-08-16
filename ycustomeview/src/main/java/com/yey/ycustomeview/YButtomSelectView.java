@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class YButtomSelectView extends FrameLayout {
     // 错误状态记录
     private boolean hasErrStatus;
     private boolean etHasFocus;
+    private int mSizeImage;
 
     public YButtomSelectView(@NonNull Context context) {
         this(context, null);
@@ -72,6 +74,7 @@ public class YButtomSelectView extends FrameLayout {
         mLoseFocusColor = typedArray.getColor(R.styleable.YButtomSelectView_y_lose_focus, Color.GRAY);
         mGetFocusColor = typedArray.getColor(R.styleable.YButtomSelectView_y_get_focus, Color.BLUE);
         mImageResourceId = typedArray.getResourceId(R.styleable.YButtomSelectView_y_image_id, 0);
+        mSizeImage = typedArray.getDimensionPixelSize(R.styleable.YButtomSelectView_image_size, 0);
         typedArray.recycle();
     }
 
@@ -117,6 +120,11 @@ public class YButtomSelectView extends FrameLayout {
         mIvImage = (ImageView) findViewById(R.id.iv_image);
         if (mImageResourceId != 0) {
             mIvImage.setImageResource(mImageResourceId);
+        }
+        if (mSizeImage != 0) {
+            ViewGroup.LayoutParams layoutParams = mIvImage.getLayoutParams();
+            layoutParams.width = mSizeImage;
+            mIvImage.setLayoutParams(layoutParams);
         }
 
     }

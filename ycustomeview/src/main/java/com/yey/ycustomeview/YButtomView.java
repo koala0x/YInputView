@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.yey.ycustomeview.util.KeyboardUtils;
 public class YButtomView extends FrameLayout {
     private static String mContentStr;
     private int mContentColor;
+    private int mSizeImage;
     private String mErrStr;
     private int mErrColor;
     // 失去焦点时候提示颜色
@@ -61,6 +63,7 @@ public class YButtomView extends FrameLayout {
         mLoseFocusColor = typedArray.getColor(R.styleable.YButtomView_y_lose_focus, Color.GRAY);
         mGetFocusColor = typedArray.getColor(R.styleable.YButtomView_y_get_focus, Color.BLUE);
         mImageResourceId = typedArray.getResourceId(R.styleable.YButtomView_y_image_id, 0);
+        mSizeImage = typedArray.getDimensionPixelSize(R.styleable.YButtomSelectView_image_size, 0);
         typedArray.recycle();
     }
 
@@ -92,7 +95,11 @@ public class YButtomView extends FrameLayout {
         if (mImageResourceId != 0) {
             mIvImage.setImageResource(mImageResourceId);
         }
-
+        if (mSizeImage != 0) {
+            ViewGroup.LayoutParams layoutParams = mIvImage.getLayoutParams();
+            layoutParams.width = mSizeImage;
+            mIvImage.setLayoutParams(layoutParams);
+        }
     }
 
     private void initListener() {

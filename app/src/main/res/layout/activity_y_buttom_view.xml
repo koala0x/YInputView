@@ -20,6 +20,7 @@
             android:id="@+id/ybtn_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:image_size="5dp"
             app:y_content_desc="牌照"
             app:y_err_desc="错误"
             app:y_image_id="@drawable/kk" />
@@ -29,6 +30,7 @@
             android:id="@+id/ybtn_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:image_size="5dp"
             app:y_content_desc="牌照2"
             app:y_err_desc="错误2"
             app:y_image_id="@drawable/kk" />
