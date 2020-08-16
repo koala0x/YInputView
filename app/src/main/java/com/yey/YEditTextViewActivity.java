@@ -33,26 +33,20 @@ public class YEditTextViewActivity extends AppCompatActivity {
         binding.btnShowErr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 使用LiveData 通知显示错误
-                mVM.mErrStatus.set(true);
+                binding.cetv1.setErr();
             }
         });
 
         binding.btnHideErr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 使用LiveData 通知隐藏错误
-                mVM.mErrStatus.set(false);
+                binding.cetv1.clearErr();
             }
         });
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("LongLogTag")
             @Override
             public void onClick(View v) {
-                Log.e(TAG, mVM.mNotifyFocus.get().booleanValue() + "");
-                // 失去焦点
-                // mVM.mNotifyFocus.set(false);
-                // binding.cetv1.getEditText().clearFocus();
                 binding.cetv2.requestFocus();
             }
         });
@@ -60,7 +54,7 @@ public class YEditTextViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 获取焦点
-                mVM.mNotifyFocus.set(!mVM.mNotifyFocus.get().booleanValue());
+                binding.cetv1.requestFocus();
             }
         });
         // 打印数据

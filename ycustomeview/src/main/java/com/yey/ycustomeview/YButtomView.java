@@ -111,16 +111,14 @@ public class YButtomView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    mTvContent.setTextColor(mGetFocusColor);
                     mLineView.setBackgroundColor(mGetFocusColor);
-//                    if (mYClickListener != null) {
-//                        // 点击回调
-//                        mYClickListener.onClick(true);
-//                    }
+                    if (mYClickListener != null) {
+                        // 焦点获取
+                        mYClickListener.onClick(true);
+                    }
                     KeyboardUtils.hideSoftInput(YButtomView.this);
                 } else {
                     mLineView.setBackgroundColor(mLoseFocusColor);
-                    mTvContent.setTextColor(mLoseFocusColor);
                 }
             }
         });
@@ -133,7 +131,7 @@ public class YButtomView extends FrameLayout {
 
     public interface YClickListener {
         /**
-         * @param isFocus true 通过LiveData通知的点击
+         * @param isFocus true 通过获取焦点回调事件
          *                false 通过用户手动点击的事件
          */
         void onClick(boolean isFocus);
@@ -179,76 +177,15 @@ public class YButtomView extends FrameLayout {
         mTvErr.setVisibility(View.INVISIBLE);
         if (etHasFocus) {
             mLineView.setBackgroundColor(mGetFocusColor);
-            mTvContent.setTextColor(mGetFocusColor);
         } else {
             mLineView.setBackgroundColor(mLoseFocusColor);
-            mTvContent.setTextColor(mLoseFocusColor);
         }
-    }
-
-    // 设置控件处于报错状态
-    @BindingAdapter("y_err_status")
-    public static void setErr(YButtomView ybv, Boolean isErr) {
-        if (ybv != null) {
-            if (isErr) {
-                ybv.setErr();
-            } else {
-                ybv.clearErr();
-            }
-        }
-    }
-
-    // 为ImageView加载图片
-    @BindingAdapter("y_image_url")
-    public static void setImageURL(YButtomView ybv, String url) {
-        if (ybv != null && url != null && ybv.mYLoadImageListener != null) {
-            if (url.startsWith("http")) {
-                // 通过网络加载图片
-                ybv.mYLoadImageListener.loadHtpp(ybv.mIvImage, url);
-            } else {
-                // 通过本地资源加载图片
-                ybv.mYLoadImageListener.loadLocal(ybv.mIvImage, url);
-            }
-        }
-    }
-
-    public interface YLoadImageListener {
-        /**
-         * 通过网络添加图片
-         */
-        void loadHtpp(ImageView imageView, String url);
-
-        /**
-         * 通过本地加载图片
-         */
-        void loadLocal(ImageView imageView, String url);
-    }
-
-    private YLoadImageListener mYLoadImageListener;
-
-    /**
-     * 设置加载图片监听
-     *
-     * @param yLoadImageListener
-     */
-    public void setYLoadImageListener(YLoadImageListener yLoadImageListener) {
-        mYLoadImageListener = yLoadImageListener;
     }
 
     /**
-     * 通知YBottomView执行点击回调和是否应该失去焦点
+     * 获取图标控件
      */
-    @BindingAdapter("y_notify_click_focus")
-    public static void notifyClickAndFocus(YButtomView ybv, Boolean isClickAndfocus) {
-        if (ybv != null && isClickAndfocus != null && ybv.mYClickListener != null) {
-            if (isClickAndfocus) {
-                ybv.mYClickListener.onClick(true);
-                // 获取焦点
-                ybv.requestFocus();
-            } else {
-                // 失去焦点
-                ybv.clearFocus();
-            }
-        }
+    public ImageView getIcon() {
+        return mIvImage;
     }
 }

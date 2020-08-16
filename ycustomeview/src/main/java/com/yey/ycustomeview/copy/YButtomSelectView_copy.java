@@ -1,4 +1,4 @@
-package com.yey.ycustomeview;
+package com.yey.ycustomeview.copy;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,11 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 
+import com.yey.ycustomeview.R;
+import com.yey.ycustomeview.YButtomView;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
-import static android.content.ContentValues.TAG;
-
-public class YButtomSelectView extends FrameLayout {
+public class YButtomSelectView_copy extends FrameLayout {
     private static final String TAG1 = "YButtomSelectView";
     private static String mContentStr;
     private int mContentColor;
@@ -45,15 +44,15 @@ public class YButtomSelectView extends FrameLayout {
     private boolean hasErrStatus;
     private boolean etHasFocus;
 
-    public YButtomSelectView(@NonNull Context context) {
+    public YButtomSelectView_copy(@NonNull Context context) {
         this(context, null);
     }
 
-    public YButtomSelectView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public YButtomSelectView_copy(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YButtomSelectView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YButtomSelectView_copy(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initXmlParams(context, attrs, defStyleAttr);
         initView(context);
@@ -127,7 +126,7 @@ public class YButtomSelectView extends FrameLayout {
                     // 点击回调
                     mYClickListener.onClick(false);
                 }
-                YButtomSelectView.this.requestFocus();
+                YButtomSelectView_copy.this.requestFocus();
             }
         });
 
@@ -136,13 +135,9 @@ public class YButtomSelectView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    if (mYClickListener != null) {
-                        // 焦点获取
-                        mYClickListener.onClick(true);
-                    }
                     mTvHint.setTextColor(mGetFocusColor);
                     mLineView.setBackgroundColor(mGetFocusColor);
-                    KeyboardUtils.hideSoftInput(YButtomSelectView.this);
+                    KeyboardUtils.hideSoftInput(YButtomSelectView_copy.this);
                 } else {
                     mTvHint.setTextColor(mLoseFocusColor);
                     mLineView.setBackgroundColor(mLoseFocusColor);
@@ -191,7 +186,7 @@ public class YButtomSelectView extends FrameLayout {
 
     public interface YClickListener {
         /**
-         * @param isFocus true 通过获取焦点回调事件
+         * @param isFocus true 通过LiveData通知的点击
          *                false 通过用户手动点击的事件
          */
         void onClick(boolean isFocus);
@@ -260,10 +255,69 @@ public class YButtomSelectView extends FrameLayout {
         }
     }
 
+    // 设置控件处于报错状态
+    @BindingAdapter("y_err_status")
+    public static void setErr(YButtomView ybv, Boolean isErr) {
+        if (ybv != null) {
+            if (isErr) {
+                ybv.setErr();
+            } else {
+                ybv.clearErr();
+            }
+        }
+    }
+
+    // 为ImageView加载图片
+    @BindingAdapter("y_image_url")
+    public static void setImageURL(YButtomSelectView_copy ybv, String url) {
+        if (ybv != null && url != null && ybv.mYLoadImageListener != null) {
+            if (url.startsWith("http")) {
+                // 通过网络加载图片
+                ybv.mYLoadImageListener.loadHtpp(ybv.mIvImage, url);
+            } else {
+                // 通过本地资源加载图片
+                ybv.mYLoadImageListener.loadLocal(ybv.mIvImage, url);
+            }
+        }
+    }
+
+    public interface YLoadImageListener {
+        /**
+         * 通过网络添加图片
+         */
+        void loadHtpp(ImageView imageView, String url);
+
+        /**
+         * 通过本地加载图片
+         */
+        void loadLocal(ImageView imageView, String url);
+    }
+
+    private YLoadImageListener mYLoadImageListener;
+
     /**
-     * 获取图标控件
+     * 设置加载图片监听
+     *
+     * @param yLoadImageListener
      */
-    public ImageView getIcon() {
-        return mIvImage;
+    public void setYLoadImageListener(YLoadImageListener yLoadImageListener) {
+        mYLoadImageListener = yLoadImageListener;
+    }
+
+    /**
+     * 通知YBottomView执行点击回调和是否应该失去焦点
+     */
+    @BindingAdapter("y_notify_click_focus")
+    public static void notifyClickAndFocus(YButtomSelectView_copy ybv, Boolean isClickAndfocus) {
+        if (ybv != null && isClickAndfocus != null && ybv.mYClickListener != null) {
+            if (isClickAndfocus) {
+                ybv.mYClickListener.onClick(true);
+                // 获取焦点
+                ybv.requestFocus();
+            } else {
+                // 失去焦点
+                ybv.clearFocus();
+            }
+        }
     }
 }

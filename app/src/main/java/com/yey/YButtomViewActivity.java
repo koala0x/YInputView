@@ -30,30 +30,27 @@ public class YButtomViewActivity extends AppCompatActivity {
         binding.btnShowErr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 使用LiveData 通知显示错误
-                mVM.mErrStatus.set(true);
+                binding.ybtn1.setErr();
             }
         });
 
         binding.btnHideErr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 使用LiveData 通知隐藏错误
-                mVM.mErrStatus.set(false);
+                binding.ybtn1.clearErr();
             }
         });
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 失去焦点
-                mVM.mNotifyClickAndFocus.set(!mVM.mNotifyClickAndFocus.get().booleanValue());
+                binding.ybtn2.requestFocus();
             }
         });
         binding.btnNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 用LiveData 通知YButtomView 点击事件
-                mVM.mNotifyClickAndFocus.set(!mVM.mNotifyClickAndFocus.get().booleanValue());
+                // 获取焦点相当于被点击
+                binding.ybtn1.requestFocus();
             }
         });
         // 点击回调
@@ -62,7 +59,7 @@ public class YButtomViewActivity extends AppCompatActivity {
             @Override
             public void onClick(boolean isFocus) {
                 if (isFocus) {
-                    Log.e(TAG1, "ybtn1 LiveData通知的回调");
+                    Log.e(TAG1, "ybtn1 获取焦点回调");
                 } else {
                     Log.e(TAG1, "ybtn1 点击时候调用");
                 }
@@ -74,48 +71,12 @@ public class YButtomViewActivity extends AppCompatActivity {
             @Override
             public void onClick(boolean isFocus) {
                 if (isFocus) {
-                    Log.e(TAG1, "ybtn2 LiveData通知的回调");
+                    Log.e(TAG1, "ybtn2 获取焦点回调");
                 } else {
                     Log.e(TAG1, "ybtn2 点击时候调用");
                 }
             }
         });
 
-
-        binding.ybtn1.setYLoadImageListener(new YButtomView.YLoadImageListener() {
-            @SuppressLint("LongLogTag")
-            @Override
-            public void loadHtpp(ImageView imageView, String url) {
-                Log.e(TAG1, "ybtn1 网络加载" + url);
-            }
-
-            @SuppressLint("LongLogTag")
-            @Override
-            public void loadLocal(ImageView imageView, String url) {
-                Log.e(TAG1, "ybtn1 本地加载" + url);
-            }
-        });
-
-        binding.ybtn2.setYLoadImageListener(new YButtomView.YLoadImageListener() {
-            @SuppressLint("LongLogTag")
-            @Override
-            public void loadHtpp(ImageView imageView, String url) {
-                Log.e(TAG1, "ybtn2 网络加载" + url);
-            }
-
-            @SuppressLint("LongLogTag")
-            @Override
-            public void loadLocal(ImageView imageView, String url) {
-                Log.e(TAG1, "ybtn2 本地加载" + url);
-            }
-        });
-
-        // 通知更新图片
-        binding.btnLoadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mVM.mLoadImageUrl.set("https://www.gravatar.com/avatar/4ebebbf67121594bf3fb678295ce39c2?s=32&d=identicon&r=PG");
-            }
-        });
     }
 }

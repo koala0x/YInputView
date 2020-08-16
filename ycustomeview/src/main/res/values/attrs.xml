@@ -12,6 +12,7 @@
     <attr name="y_lose_focus" format="color|reference" />
     <!--        获取焦点颜色-->
     <attr name="y_get_focus" format="color|reference" />
+
     <declare-styleable name="YEditTextView">
         <!--        EditText中文字内容-->
         <attr name="y_content_desc" />
@@ -29,6 +30,8 @@
         <attr name="y_hint_desc" format="string|reference" />
         <!--        输入字符的长度-->
         <attr name="maxLength" format="integer" min="0" />
+        <!--        图片资源-->
+        <attr name="y_image_id" format="reference" />
         <!--        输入内容的类型-->
         <attr name="inputType">
             <!-- There is no content type.  The text is not editable. -->
@@ -181,7 +184,28 @@
         <!--        获取焦点颜色-->
         <attr name="y_get_focus" />
         <!--        图片资源-->
-        <attr name="y_image_id" format="reference" />
+        <attr name="y_image_id" />
+    </declare-styleable>
+
+
+    <declare-styleable name="YButtomSelectView">
+        <!--        按钮文字内容-->
+        <attr name="y_content_desc" />
+        <!--        按钮文字颜色-->
+        <attr name="y_et_content_color" />
+        <!--        错误提示内容-->
+        <attr name="y_err_desc" />
+        <!--        错误提示颜色-->
+        <attr name="y_tv_err_color" />
+        <!--        失去焦点颜色-->
+        <attr name="y_lose_focus" />
+        <!--        获取焦点颜色-->
+        <attr name="y_get_focus" />
+        <!--        图片资源-->
+        <attr name="y_image_id" />
+
+        <attr name="y_content_change_color" format="color|reference" />
+
 
     </declare-styleable>
 

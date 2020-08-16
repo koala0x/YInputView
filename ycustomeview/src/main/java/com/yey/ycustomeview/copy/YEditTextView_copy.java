@@ -1,4 +1,4 @@
-package com.yey.ycustomeview;
+package com.yey.ycustomeview.copy;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,12 +22,13 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
+import com.yey.ycustomeview.R;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 // 双向绑定参考: https://www.jianshu.com/p/bd687e5b14c2
 // 双向绑定参考: https://blog.chrnie.com/2016/12/02/%E8%87%AA%E5%AE%9A%E4%B9%89-DataBinding-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7/
 // https://stackoverflow.com/a/34817565/7986616
-public class YEditTextView extends FrameLayout {
+public class YEditTextView_copy extends FrameLayout {
     private static final String TAG = "CustomeEditTextView 日志";
     // 控件高度
     private EditText mEtContent;
@@ -54,15 +55,15 @@ public class YEditTextView extends FrameLayout {
     // 输入内容长度
     private int mMaxLength;
 
-    public YEditTextView(@NonNull Context context) {
+    public YEditTextView_copy(@NonNull Context context) {
         this(context, null);
     }
 
-    public YEditTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public YEditTextView_copy(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YEditTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YEditTextView_copy(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initXmlParams(context, attrs, defStyleAttr);
         initView(context);
@@ -131,6 +132,9 @@ public class YEditTextView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
+                    if (mFocusChangeListener != null) {
+                        mFocusChangeListener.change(true);
+                    }
                     // 获取焦点
                     // 1. EditText hint提示取消
                     // 2. TextView提示控件显示,文字色高亮,内容为XML中设置的提示文字
@@ -145,6 +149,9 @@ public class YEditTextView extends FrameLayout {
                     KeyboardUtils.showSoftInput(mEtContent, 0);
 
                 } else {
+                    if (mFocusChangeListener != null) {
+                        mFocusChangeListener.change(false);
+                    }
                     /**
                      * 失去焦点时候
                      * 1. EditText中有内容
@@ -284,7 +291,7 @@ public class YEditTextView extends FrameLayout {
 
     // SET 方法
     @BindingAdapter("y_content")
-    public static void setStr(YEditTextView cetv, String content) {
+    public static void setStr(YEditTextView_copy cetv, String content) {
         if (cetv != null) {
             String mCurrentStr = cetv.mEtContent.getText().toString().trim();
             if (!TextUtils.isEmpty(content)) {
@@ -299,13 +306,13 @@ public class YEditTextView extends FrameLayout {
 
     // GET 方法
     @InverseBindingAdapter(attribute = "y_content", event = "contentAttrChanged")
-    public static String getStr(YEditTextView cetv) {
+    public static String getStr(YEditTextView_copy cetv) {
         return cetv.mEtContent.getText().toString().trim();
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
     @BindingAdapter(value = "contentAttrChanged", requireAll = false)
-    public static void setChangeListener(YEditTextView cetv, InverseBindingListener listener) {
+    public static void setChangeListener(YEditTextView_copy cetv, InverseBindingListener listener) {
         cetv.mEtContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -323,7 +330,17 @@ public class YEditTextView extends FrameLayout {
         });
     }
 
-
+    // 设置控件处于报错状态
+    @BindingAdapter("y_err_status")
+    public static void setErr(YEditTextView_copy cetv, Boolean isErr) {
+        if (cetv != null) {
+            if (isErr) {
+                cetv.setErr();
+            } else {
+                cetv.clearErr();
+            }
+        }
+    }
 
     /**
      * 监听YEditTextView的下一步键盘点击事件
@@ -336,11 +353,56 @@ public class YEditTextView extends FrameLayout {
     private KeyboardNextListener mKeyboardNextListener;
 
     /**
-     * 设置键盘下一步监听
+     * 设置监听
      */
     public void setKeyboardNextListener(KeyboardNextListener keyboardNextListener) {
         mKeyboardNextListener = keyboardNextListener;
     }
 
+    // 监听当前控件是否获取焦点
+    private interface IFocusChangeListener {
+        void change(boolean isFocus);
+    }
+
+    private IFocusChangeListener mFocusChangeListener;
+
+    public void setIFocusChangeListener(IFocusChangeListener iFocusChangeListener) {
+        mFocusChangeListener = iFocusChangeListener;
+    }
+
+
+    /**
+     * 通知YEditTextView是否该失去焦点或者主动获取焦点
+     */
+    @BindingAdapter("y_notify_focus")
+    public static void setNotifyFocus(YEditTextView_copy yetv, Boolean isFocus) {
+        if (yetv != null && isFocus != null && isFocus != etHasFocus) {
+            if (isFocus) {
+                // 获取焦点
+                yetv.mEtContent.requestFocus();
+            } else {
+                // 失去焦点
+                yetv.mEtContent.clearFocus();
+            }
+        }
+    }
+
+    // GET 方法
+    @InverseBindingAdapter(attribute = "y_notify_focus", event = "FocusAttrChanged")
+    public static Boolean getNotifyFocus(YEditTextView_copy cetv) {
+        boolean focusStatus = cetv.getFocusStatus();
+        return focusStatus;
+    }
+
+    // 监听,如果有变动就调用listener中的onChange方法
+    @BindingAdapter(value = "FocusAttrChanged", requireAll = false)
+    public static void NotifyFocus(YEditTextView_copy cetv, InverseBindingListener listener) {
+        cetv.setIFocusChangeListener(new IFocusChangeListener() {
+            @Override
+            public void change(boolean isFocus) {
+                listener.onChange();
+            }
+        });
+    }
 
 }

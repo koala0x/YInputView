@@ -24,10 +24,8 @@
             app:maxLength="3"
             app:y_content="@={mVM.mContentMLD1}"
             app:y_err_desc="错误"
-            app:y_err_status="@{mVM.mErrStatus}"
             app:y_get_focus="@android:color/holo_orange_dark"
-            app:y_hint_desc="提示"
-            app:y_notify_focus="@={mVM.mNotifyFocus}" />
+            app:y_hint_desc="提示" />
 
 
         <com.yey.ycustomeview.YEditTextView

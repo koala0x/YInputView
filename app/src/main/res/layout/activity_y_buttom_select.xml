@@ -7,10 +7,58 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".YButtomSelectViewActivity">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.yey.ycustomeview.YButtomSelectView
+            android:id="@+id/ybsv_1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_change_color="@android:color/black"
+            app:y_content_desc="证件照类型"
+            app:y_et_content_color="@android:color/darker_gray"
+            app:y_get_focus="@color/colorPrimary"
+            app:y_image_id="@drawable/kk"
+            app:y_lose_focus="@android:color/darker_gray" />
+
+        <com.yey.ycustomeview.YButtomSelectView
+            android:id="@+id/ybsv_2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:y_content_change_color="@android:color/black"
+            app:y_content_desc="证件照类型"
+            app:y_et_content_color="@android:color/darker_gray"
+            app:y_get_focus="@color/colorPrimary"
+            app:y_image_id="@drawable/kk"
+            app:y_lose_focus="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/btn_chage_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="改变内容" />
+
+        <Button
+            android:id="@+id/btn_clear_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="清空控件内容" />
+
+        <Button
+            android:id="@+id/btn_show_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示错误" />
+
+        <Button
+            android:id="@+id/btn_hide_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐藏错误" />
+
+
+    </LinearLayout>
 </layout>

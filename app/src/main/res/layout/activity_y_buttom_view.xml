@@ -22,10 +22,7 @@
             android:layout_height="60dp"
             app:y_content_desc="牌照"
             app:y_err_desc="错误"
-            app:y_err_status="@{mVM.mErrStatus}"
-            app:y_image_id="@drawable/kk"
-            app:y_image_url="@{mVM.mLoadImageUrl}"
-            app:y_notify_click_focus="@{mVM.mNotifyClickAndFocus}" />
+            app:y_image_id="@drawable/kk" />
 
 
         <com.yey.ycustomeview.YButtomView
@@ -59,10 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="通知YButtomView点击事件" />
-        <Button
-            android:id="@+id/btn_load_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="通知更新图片" />
+
     </LinearLayout>
 </layout>
