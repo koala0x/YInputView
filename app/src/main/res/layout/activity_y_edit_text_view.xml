@@ -22,7 +22,7 @@
             android:layout_height="60dp"
             app:inputType="phone"
             app:maxLength="3"
-            app:y_content="@={mVM.mContentMLD1}"
+            app:y_change_content="@={mVM.mContentMLD1}"
             app:y_err_desc="错误"
             app:y_get_focus="@android:color/holo_orange_dark"
             app:y_hint_desc="提示" />
@@ -32,7 +32,7 @@
             android:id="@+id/cetv_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:y_content="@={mVM.mContentMLD2}"
+            app:y_change_content="@={mVM.mContentMLD2}"
             app:y_err_desc="错误"
             app:y_get_focus="@android:color/holo_purple"
             app:y_hint_desc="提示" />

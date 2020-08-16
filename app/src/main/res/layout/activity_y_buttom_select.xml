@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="mVM"
+            type="com.yey.vm.YButtomSelectViewVM" />
     </data>
 
     <LinearLayout
@@ -17,6 +20,7 @@
             android:id="@+id/ybsv_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:y_change_content="@={mVM.mChangeContent}"
             app:y_content_change_color="@android:color/black"
             app:y_content_desc="证件照类型"
             app:y_et_content_color="@android:color/darker_gray"
@@ -28,6 +32,7 @@
             android:id="@+id/ybsv_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:y_change_content="@={mVM.mChangeContent}"
             app:y_content_change_color="@android:color/black"
             app:y_content_desc="证件照类型"
             app:y_et_content_color="@android:color/darker_gray"
@@ -59,6 +64,10 @@
             android:layout_height="wrap_content"
             android:text="隐藏错误" />
 
-
+        <Button
+            android:id="@+id/btn_print_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打印数据" />
     </LinearLayout>
 </layout>
