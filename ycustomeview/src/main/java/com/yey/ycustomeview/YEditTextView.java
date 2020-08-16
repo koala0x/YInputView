@@ -283,7 +283,7 @@ public class YEditTextView extends FrameLayout {
     }
 
     // SET 方法
-    @BindingAdapter("y_content")
+    @BindingAdapter("y_change_content")
     public static void setStr(YEditTextView cetv, String content) {
         if (cetv != null) {
             String mCurrentStr = cetv.mEtContent.getText().toString().trim();
@@ -298,7 +298,7 @@ public class YEditTextView extends FrameLayout {
     }
 
     // GET 方法
-    @InverseBindingAdapter(attribute = "y_content", event = "contentAttrChanged")
+    @InverseBindingAdapter(attribute = "y_change_content", event = "contentAttrChanged")
     public static String getStr(YEditTextView cetv) {
         return cetv.mEtContent.getText().toString().trim();
     }

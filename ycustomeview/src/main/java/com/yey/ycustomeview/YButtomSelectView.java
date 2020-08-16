@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 import com.yey.ycustomeview.util.KeyboardUtils;
 
@@ -265,5 +267,44 @@ public class YButtomSelectView extends FrameLayout {
      */
     public ImageView getIcon() {
         return mIvImage;
+    }
+
+    // SET 方法
+    @BindingAdapter("y_change_content")
+    public static void setContent(YButtomSelectView ybsv, String content) {
+        if (ybsv != null) {
+            String mCurrentStr = ybsv.mTvContent.getText().toString().trim();
+            if (!TextUtils.isEmpty(content)) {
+                if (!content.equalsIgnoreCase(mCurrentStr)) {
+                    ybsv.mTvContent.setText(content);
+                }
+            }
+        }
+    }
+
+    // GET 方法
+    @InverseBindingAdapter(attribute = "y_change_content", event = "contentAttrChanged")
+    public static String getContent(YButtomSelectView ybsv) {
+        return ybsv.mTvContent.getText().toString().trim();
+    }
+
+    // 监听,如果有变动就调用listener中的onChange方法
+    @BindingAdapter(value = "contentAttrChanged", requireAll = false)
+    public static void setContentChangeListener(YButtomSelectView ybsv, InverseBindingListener listener) {
+        ybsv.mTvContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listener.onChange();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }
