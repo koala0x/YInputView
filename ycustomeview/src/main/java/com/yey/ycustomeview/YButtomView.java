@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.BindingAdapter;
 
 import com.yey.ycustomeview.util.KeyboardUtils;
 
@@ -34,10 +33,13 @@ public class YButtomView extends FrameLayout {
     private ImageView mIvImage;
     private int mImageResourceId;
     // 点击回调
-    private YClickListener mYClickListener;
+    private YBVListener mYBVListener;
     // 错误状态记录
     private boolean hasErrStatus;
     private boolean etHasFocus;
+
+    // 记录第几次获取焦点
+    private int mCountFocus;
 
     public YButtomView(@NonNull Context context) {
         this(context, null);
@@ -106,9 +108,9 @@ public class YButtomView extends FrameLayout {
         this.getChildAt(0).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mYClickListener != null) {
+                if (mYBVListener != null) {
                     // 点击回调
-                    mYClickListener.onClick(false);
+                    mYBVListener.onClick(YButtomView.this);
                 }
                 YButtomView.this.requestFocus();
             }
@@ -118,30 +120,44 @@ public class YButtomView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    mLineView.setBackgroundColor(mGetFocusColor);
-                    if (mYClickListener != null) {
+                    if (mYBVListener != null) {
                         // 焦点获取
-                        mYClickListener.onClick(true);
+                        mYBVListener.getFocuse(mCountFocus, YButtomView.this);
+                        mCountFocus++;
                     }
                     KeyboardUtils.hideSoftInput(YButtomView.this);
+                    mLineView.setBackgroundColor(mGetFocusColor);
                 } else {
                     mLineView.setBackgroundColor(mLoseFocusColor);
+                }
+                if (hasErrStatus) {
+                    // 如果处于错误状态
+                    mLineView.setBackgroundColor(mErrColor);
                 }
             }
         });
     }
 
     // 为YButtomView设置回调监听
-    public void setYClickListener(YClickListener yClickListener) {
-        mYClickListener = yClickListener;
+    public void setYBVListener(YBVListener ybvListener) {
+        mYBVListener = ybvListener;
     }
 
-    public interface YClickListener {
+    public interface YBVListener {
         /**
-         * @param isFocus true 通过获取焦点回调事件
-         *                false 通过用户手动点击的事件
+         * 控件被点击
+         *
+         * @param yButtomView
          */
-        void onClick(boolean isFocus);
+        void onClick(YButtomView yButtomView);
+
+        /**
+         * 控件第几次获取到焦点
+         *
+         * @param count
+         * @param yButtomView
+         */
+        void getFocuse(int count, YButtomView yButtomView);
     }
 
 

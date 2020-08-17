@@ -54,27 +54,31 @@ public class YButtomViewActivity extends AppCompatActivity {
             }
         });
         // 点击回调
-        binding.ybtn1.setYClickListener(new YButtomView.YClickListener() {
+        binding.ybtn1.setYBVListener(new YButtomView.YBVListener() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onClick(boolean isFocus) {
-                if (isFocus) {
-                    Log.e(TAG1, "ybtn1 获取焦点回调");
-                } else {
-                    Log.e(TAG1, "ybtn1 点击时候调用");
-                }
+            public void onClick(YButtomView yButtomView) {
+                Log.e(TAG1, "ybtn1 点击时候调用");
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void getFocuse(int count, YButtomView yButtomView) {
+                Log.e(TAG1, "ybtn1 获取焦点第" + count + "次回调");
             }
         });
         // 点击回调
-        binding.ybtn2.setYClickListener(new YButtomView.YClickListener() {
+        binding.ybtn2.setYBVListener(new YButtomView.YBVListener() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onClick(boolean isFocus) {
-                if (isFocus) {
-                    Log.e(TAG1, "ybtn2 获取焦点回调");
-                } else {
-                    Log.e(TAG1, "ybtn2 点击时候调用");
-                }
+            public void onClick(YButtomView yButtomView) {
+                Log.e(TAG1, "ybtn2 点击时候调用");
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void getFocuse(int count, YButtomView yButtomView) {
+                Log.e(TAG1, "ybtn2 获取焦点第" + count + "次回调");
             }
         });
 

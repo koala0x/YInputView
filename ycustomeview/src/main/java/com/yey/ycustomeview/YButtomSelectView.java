@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,6 @@ import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
 import com.yey.ycustomeview.util.KeyboardUtils;
-
-import static android.content.ContentValues.TAG;
 
 public class YButtomSelectView extends FrameLayout {
     private static final String TAG1 = "YButtomSelectView";
@@ -43,11 +40,13 @@ public class YButtomSelectView extends FrameLayout {
     private ImageView mIvImage;
     private int mImageResourceId;
     // 点击回调
-    private YClickListener mYClickListener;
+    private YBSVListener mYBSVListener;
     // 错误状态记录
     private boolean hasErrStatus;
     private boolean etHasFocus;
     private int mSizeImage;
+    // 记录第几次获取焦点
+    private int mCountFocus;
 
     public YButtomSelectView(@NonNull Context context) {
         this(context, null);
@@ -133,9 +132,9 @@ public class YButtomSelectView extends FrameLayout {
         this.getChildAt(0).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mYClickListener != null) {
+                if (mYBSVListener != null) {
                     // 点击回调
-                    mYClickListener.onClick(false);
+                    mYBSVListener.onClick(YButtomSelectView.this);
                 }
                 YButtomSelectView.this.requestFocus();
             }
@@ -146,9 +145,10 @@ public class YButtomSelectView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    if (mYClickListener != null) {
+                    if (mYBSVListener != null) {
                         // 焦点获取
-                        mYClickListener.onClick(true);
+                        mYBSVListener.getFocuse(mCountFocus,YButtomSelectView.this);
+                        mCountFocus++;
                     }
                     mTvHint.setTextColor(mGetFocusColor);
                     mLineView.setBackgroundColor(mGetFocusColor);
@@ -164,7 +164,6 @@ public class YButtomSelectView extends FrameLayout {
                     mTvHint.setTextColor(mErrColor);
                     mLineView.setBackgroundColor(mErrColor);
                 }
-
             }
         });
 
@@ -195,16 +194,24 @@ public class YButtomSelectView extends FrameLayout {
     }
 
     // 为YButtomView设置回调监听
-    public void setYClickListener(YClickListener yClickListener) {
-        mYClickListener = yClickListener;
+    public void setYBSVListener(YBSVListener ybsvListener) {
+        mYBSVListener = ybsvListener;
     }
 
-    public interface YClickListener {
+    public interface YBSVListener {
         /**
-         * @param isFocus true 通过获取焦点回调事件
-         *                false 通过用户手动点击的事件
+         * 控件被点击
+         * @param yButtomSelectView
          */
-        void onClick(boolean isFocus);
+        void onClick(YButtomSelectView yButtomSelectView);
+
+        /**
+         * 控件第几次获取到焦点
+         *
+         * @param count
+         * @param yButtomSelectView
+         */
+        void getFocuse(int count, YButtomSelectView yButtomSelectView);
     }
 
 
