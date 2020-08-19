@@ -29,8 +29,8 @@ import com.yey.ycustomeview.util.KeyboardUtils;
 // https://stackoverflow.com/a/34817565/7986616
 public class YEditTextView extends FrameLayout {
     private static final String TAG = "CustomeEditTextView 日志";
-    // 控件高度
     private EditText mEtContent;
+    private TextView mTvContentHead;
     private TextView mTvErr;
     private TextView mTvHint;
     private String mErrStr;
@@ -100,6 +100,8 @@ public class YEditTextView extends FrameLayout {
         if (mMaxLength > 0) {
             mEtContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mMaxLength)});
         }
+        mTvContentHead = (TextView) findViewById(R.id.tv_content_head);
+        mTvContentHead.setTextColor(mEtContentColor);
 
         mTvHint = (TextView) findViewById(R.id.tv_y_hint);
         mTvHint.setText(mHintStr);
@@ -221,6 +223,13 @@ public class YEditTextView extends FrameLayout {
     }
 
     /**
+     * 获取内容头控件
+     */
+    public TextView getContentHead() {
+        return mTvContentHead;
+    }
+
+    /**
      * 为EditText控件添加内容改变监听
      */
     public void setTextChangedListener(TextWatcher textWatcher) {
@@ -322,7 +331,6 @@ public class YEditTextView extends FrameLayout {
             }
         });
     }
-
 
 
     /**
