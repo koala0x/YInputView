@@ -88,6 +88,9 @@ public class YEditTextView extends FrameLayout {
     // 初始化View
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_y_edite_textview, this);
+
+
+
         // 设置内容
         mEtContent = (EditText) findViewById(R.id.et_y_content);
         mEtContent.setText(mContentStr);
@@ -100,8 +103,8 @@ public class YEditTextView extends FrameLayout {
         if (mMaxLength > 0) {
             mEtContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mMaxLength)});
         }
+
         mTvContentHead = (TextView) findViewById(R.id.tv_content_head);
-        mTvContentHead.setTextColor(mEtContentColor);
 
         mTvHint = (TextView) findViewById(R.id.tv_y_hint);
         mTvHint.setText(mHintStr);

@@ -25,7 +25,7 @@ android {
         }
     }
 }
-def isHttp = false
+def isHttp = true
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -34,9 +34,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     if (isHttp) {
-        implementation 'com.yey:ycustomeview:1.1.1'
+        implementation 'com.yey:ycustomeview:1.1.3'
     } else {
-        implementation project(path: ':ycustomeview')
+        //implementation project(path: ':ycustomeview')
     }
     // implementation project(path: ':ycustomeview')
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
