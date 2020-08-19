@@ -41,6 +41,9 @@ public class YButtomView extends FrameLayout {
     // 记录第几次获取焦点
     private int mCountFocus;
 
+    // 标记是否是点击事件获取到焦点
+    private boolean isClick;
+
     public YButtomView(@NonNull Context context) {
         this(context, null);
     }
@@ -112,7 +115,10 @@ public class YButtomView extends FrameLayout {
                     // 点击回调
                     mYBVListener.onClick(YButtomView.this);
                 }
+                // 是点击事件导致获取焦点
+                isClick = true;
                 YButtomView.this.requestFocus();
+                isClick = false;
             }
         });
         this.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -120,7 +126,7 @@ public class YButtomView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    if (mYBVListener != null) {
+                    if (mYBVListener != null && !isClick) {
                         // 焦点获取
                         mYBVListener.getFocuse(mCountFocus, YButtomView.this);
                         mCountFocus++;

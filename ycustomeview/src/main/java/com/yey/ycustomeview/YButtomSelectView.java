@@ -47,6 +47,8 @@ public class YButtomSelectView extends FrameLayout {
     private int mSizeImage;
     // 记录第几次获取焦点
     private int mCountFocus;
+    // 标记是否是点击事件获取到焦点
+    private boolean isClick;
 
     public YButtomSelectView(@NonNull Context context) {
         this(context, null);
@@ -136,7 +138,10 @@ public class YButtomSelectView extends FrameLayout {
                     // 点击回调
                     mYBSVListener.onClick(YButtomSelectView.this);
                 }
+                // 是点击事件导致获取焦点
+                isClick = true;
                 YButtomSelectView.this.requestFocus();
+                isClick = false;
             }
         });
 
@@ -145,10 +150,11 @@ public class YButtomSelectView extends FrameLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    if (mYBSVListener != null) {
+                    if (mYBSVListener != null && !isClick) {
                         // 焦点获取
-                        mYBSVListener.getFocuse(mCountFocus,YButtomSelectView.this);
+                        mYBSVListener.getFocuse(mCountFocus, YButtomSelectView.this);
                         mCountFocus++;
+
                     }
                     mTvHint.setTextColor(mGetFocusColor);
                     mLineView.setBackgroundColor(mGetFocusColor);
@@ -201,6 +207,7 @@ public class YButtomSelectView extends FrameLayout {
     public interface YBSVListener {
         /**
          * 控件被点击
+         *
          * @param yButtomSelectView
          */
         void onClick(YButtomSelectView yButtomSelectView);
