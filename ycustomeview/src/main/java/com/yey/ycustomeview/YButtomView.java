@@ -217,4 +217,8 @@ public class YButtomView extends FrameLayout {
     public ImageView getIcon() {
         return mIvImage;
     }
+
+    public TextView getTvContent() {
+        return mTvContent;
+    }
 }

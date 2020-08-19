@@ -291,6 +291,15 @@ public class YButtomSelectView extends FrameLayout {
         return mIvImage;
     }
 
+    /**
+     * 获取内容控件
+     *
+     * @return
+     */
+    public TextView getTvContent() {
+        return mTvContent;
+    }
+
     // SET 方法
     @BindingAdapter("y_change_content")
     public static void setContent(YButtomSelectView ybsv, String content) {
