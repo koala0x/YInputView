@@ -17,7 +17,11 @@
         tools:text="提示" />
     <!--    EditText设置单行并且设置imeOptions="actionNext"是为了键盘右下角按钮为下一步按钮-->
 
+
+
+
     <LinearLayout
+        android:id="@+id/container_y"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="4dp"
@@ -27,13 +31,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_content_head"
+            android:id="@+id/tv_y_head"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="bottom"
+            tools:text="头 "
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            tools:text="内容头" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/et_y_content"
@@ -45,6 +49,7 @@
             android:gravity="bottom"
             android:imeOptions="actionNext"
             android:singleLine="true"
+            android:text="测试"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             tools:text="内容" />

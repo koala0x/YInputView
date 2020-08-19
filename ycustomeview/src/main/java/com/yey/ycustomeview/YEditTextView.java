@@ -30,7 +30,7 @@ import com.yey.ycustomeview.util.KeyboardUtils;
 public class YEditTextView extends FrameLayout {
     private static final String TAG = "CustomeEditTextView 日志";
     private EditText mEtContent;
-    private TextView mTvContentHead;
+    private TextView mTvHead;
     private TextView mTvErr;
     private TextView mTvHint;
     private String mErrStr;
@@ -87,14 +87,13 @@ public class YEditTextView extends FrameLayout {
 
     // 初始化View
     private void initView(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.layout_y_edite_textview, this);
-
+        LayoutInflater.from(context).inflate(R.layout.layout_y_edite_text_view, this, true);
 
 
         // 设置内容
         mEtContent = (EditText) findViewById(R.id.et_y_content);
-        mEtContent.setText(mContentStr);
         mEtContent.setTextColor(mEtContentColor);
+        mEtContent.setText(mContentStr);
         mEtContent.setHintTextColor(mLoseFocusColor);
         if (TextUtils.isEmpty(mContentStr)) {
             mEtContent.setHint(mHintStr);
@@ -104,9 +103,10 @@ public class YEditTextView extends FrameLayout {
             mEtContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mMaxLength)});
         }
 
-        mTvContentHead = (TextView) findViewById(R.id.tv_content_head);
+        mTvHead = (TextView) findViewById(R.id.tv_y_head);
+        mTvHead.setTextColor(mEtContentColor);
 
-        mTvHint = (TextView) findViewById(R.id.tv_y_hint);
+        mTvHint = (TextView) this.findViewById(R.id.tv_y_hint);
         mTvHint.setText(mHintStr);
         mTvHint.setTextColor(mLoseFocusColor);
 
@@ -124,6 +124,9 @@ public class YEditTextView extends FrameLayout {
             mTvHint.setVisibility(View.VISIBLE);
         }
         mTvErr.setVisibility(View.INVISIBLE);
+
+
+
     }
 
 
@@ -229,7 +232,7 @@ public class YEditTextView extends FrameLayout {
      * 获取内容头控件
      */
     public TextView getContentHead() {
-        return mTvContentHead;
+        return mTvHead;
     }
 
     /**

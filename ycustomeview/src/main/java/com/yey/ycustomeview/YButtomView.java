@@ -82,7 +82,7 @@ public class YButtomView extends FrameLayout {
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
         this.setClickable(true);
-        LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this);
+        LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this,true);
         mTvContent = (TextView) findViewById(R.id.tv_y_content);
         mTvContent.setText(mContentStr);
         mTvContent.setTextColor(mContentColor);
