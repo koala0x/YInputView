@@ -27,7 +27,7 @@ import com.yey.ycustomeview.util.KeyboardUtils;
 // 双向绑定参考: https://www.jianshu.com/p/bd687e5b14c2
 // 双向绑定参考: https://blog.chrnie.com/2016/12/02/%E8%87%AA%E5%AE%9A%E4%B9%89-DataBinding-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7/
 // https://stackoverflow.com/a/34817565/7986616
-public class YEditTextView extends FrameLayout {
+public class YEditTextView extends FrameLayout implements IYInputView {
     private static final String TAG = "CustomeEditTextView 日志";
     private EditText mEtContent;
     private TextView mTvHead;
@@ -124,7 +124,6 @@ public class YEditTextView extends FrameLayout {
             mTvHint.setVisibility(View.VISIBLE);
         }
         mTvErr.setVisibility(View.INVISIBLE);
-
 
 
     }
@@ -260,6 +259,33 @@ public class YEditTextView extends FrameLayout {
         hasErrStatus = true;
         mTvErr.setText(err);
         setErrStatus();
+    }
+
+    private IYInputView mNextIYInputView;
+
+    /**
+     * 设置下一个控件
+     *
+     * @param iyInputView
+     */
+    @Override
+    public void nextYInputView(IYInputView iyInputView) {
+        mNextIYInputView = iyInputView;
+    }
+
+    /**
+     * 获取下一个控件
+     *
+     * @return
+     */
+    @Override
+    public IYInputView getNextYInputView() {
+        return mNextIYInputView;
+    }
+
+    @Override
+    public int getType() {
+        return IYInputView.TYPE_YETV;
     }
 
     /**

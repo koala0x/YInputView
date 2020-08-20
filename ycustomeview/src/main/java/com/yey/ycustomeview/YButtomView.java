@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.yey.ycustomeview.util.KeyboardUtils;
 
-public class YButtomView extends FrameLayout {
+public class YButtomView extends FrameLayout implements IYInputView{
     private static String mContentStr;
     private int mContentColor;
     private int mSizeImage;
@@ -170,6 +170,7 @@ public class YButtomView extends FrameLayout {
     /**
      * 显示错误信息
      */
+    @Override
     public void setErr() {
         if (!TextUtils.isEmpty(mErrStr)) {
             hasErrStatus = true;
@@ -181,10 +182,38 @@ public class YButtomView extends FrameLayout {
     /**
      * 显示错误信息
      */
+    @Override
     public void setErr(String err) {
         hasErrStatus = true;
         mTvErr.setText(err);
         setErrStatus();
+    }
+
+    private IYInputView mNextIYInputView;
+
+    /**
+     * 设置下一个控件
+     *
+     * @param iyInputView
+     */
+    @Override
+    public void nextYInputView(IYInputView iyInputView) {
+        mNextIYInputView = iyInputView;
+    }
+
+    /**
+     * 获取下一个控件
+     *
+     * @return
+     */
+    @Override
+    public IYInputView getNextYInputView() {
+        return mNextIYInputView;
+    }
+
+    @Override
+    public int getType() {
+        return IYInputView.TYPE_YBV;
     }
 
     /**
