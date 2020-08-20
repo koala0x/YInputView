@@ -214,9 +214,13 @@ public class YEditTextView extends FrameLayout implements IYInputView {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT && mKeyboardNextListener != null) {
                     // 用户点击了键盘的下一步按钮
-                    mKeyboardNextListener.nextEvent();
+                    if (mKeyboardNextListener.nextEvent()) {
+                        return true; // 保留软键盘
+                    } else {
+                        return false;// 隐藏软键盘
+                    }
                 }
-                return false;
+                return false;// 隐藏软键盘
             }
         });
     }
@@ -370,7 +374,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
      * 监听YEditTextView的下一步键盘点击事件
      */
     public interface KeyboardNextListener {
-        void nextEvent();
+        boolean nextEvent();
     }
 
     // 下一步键盘点击事件
