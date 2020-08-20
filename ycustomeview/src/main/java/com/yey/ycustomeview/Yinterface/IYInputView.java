@@ -1,4 +1,4 @@
-package com.yey.ycustomeview;
+package com.yey.ycustomeview.Yinterface;
 
 public interface IYInputView {
     int TYPE_YBV = 0;

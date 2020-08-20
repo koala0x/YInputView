@@ -15,9 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.yey.ycustomeview.Yinterface.IYInputView;
+import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
-public class YButtomView extends FrameLayout implements IYInputView{
+public class YButtomView extends FrameLayout implements IYInputView {
     private static String mContentStr;
     private int mContentColor;
     private int mSizeImage;
@@ -43,6 +45,21 @@ public class YButtomView extends FrameLayout implements IYInputView{
 
     // 标记是否是点击事件获取到焦点
     private boolean isClick;
+
+    private OnClickListener mOnClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mYBVListener != null) {
+                // 点击回调
+                mYBVListener.onClick(YButtomView.this);
+            }
+            // 是点击事件导致获取焦点
+            isClick = true;
+            YButtomView.this.requestFocus();
+            isClick = false;
+        }
+    };
+
 
     public YButtomView(@NonNull Context context) {
         this(context, null);
@@ -72,6 +89,7 @@ public class YButtomView extends FrameLayout implements IYInputView{
         typedArray.recycle();
     }
 
+
     /**
      * 设置资源
      *
@@ -82,7 +100,7 @@ public class YButtomView extends FrameLayout implements IYInputView{
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
         this.setClickable(true);
-        LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this,true);
+        LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this, true);
         mTvContent = (TextView) findViewById(R.id.tv_y_content);
         mTvContent.setText(mContentStr);
         mTvContent.setTextColor(mContentColor);
@@ -108,17 +126,10 @@ public class YButtomView extends FrameLayout implements IYInputView{
     }
 
     private void initListener() {
-        this.getChildAt(0).setOnClickListener(new OnClickListener() {
+        this.getChildAt(0).setOnClickListener(new OnDebouncingClickListener(false, 500) {
             @Override
-            public void onClick(View v) {
-                if (mYBVListener != null) {
-                    // 点击回调
-                    mYBVListener.onClick(YButtomView.this);
-                }
-                // 是点击事件导致获取焦点
-                isClick = true;
-                YButtomView.this.requestFocus();
-                isClick = false;
+            public void onDebouncingClick(View v) {
+                mOnClickListener.onClick(v);
             }
         });
         this.setOnFocusChangeListener(new OnFocusChangeListener() {

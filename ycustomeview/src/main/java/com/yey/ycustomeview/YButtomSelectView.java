@@ -20,6 +20,8 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
+import com.yey.ycustomeview.Yinterface.IYInputView;
+import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YButtomSelectView extends FrameLayout implements IYInputView {
@@ -49,6 +51,20 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
     private int mCountFocus;
     // 标记是否是点击事件获取到焦点
     private boolean isClick;
+
+    private OnClickListener mOnClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mYBSVListener != null) {
+                // 点击回调
+                mYBSVListener.onClick(YButtomSelectView.this);
+            }
+            // 是点击事件导致获取焦点
+            isClick = true;
+            YButtomSelectView.this.requestFocus();
+            isClick = false;
+        }
+    };
 
     public YButtomSelectView(@NonNull Context context) {
         this(context, null);
@@ -131,17 +147,10 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
     }
 
     private void initListener() {
-        this.getChildAt(0).setOnClickListener(new OnClickListener() {
+        this.getChildAt(0).setOnClickListener(new OnDebouncingClickListener(false, 500) {
             @Override
-            public void onClick(View v) {
-                if (mYBSVListener != null) {
-                    // 点击回调
-                    mYBSVListener.onClick(YButtomSelectView.this);
-                }
-                // 是点击事件导致获取焦点
-                isClick = true;
-                YButtomSelectView.this.requestFocus();
-                isClick = false;
+            public void onDebouncingClick(View v) {
+                mOnClickListener.onClick(v);
             }
         });
 

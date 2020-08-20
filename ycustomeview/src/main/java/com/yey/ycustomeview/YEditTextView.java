@@ -22,6 +22,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
+import com.yey.ycustomeview.Yinterface.IYInputView;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 // 双向绑定参考: https://www.jianshu.com/p/bd687e5b14c2
