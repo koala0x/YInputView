@@ -382,5 +382,17 @@ public class YEditTextView extends FrameLayout implements IYInputView {
         mKeyboardNextListener = keyboardNextListener;
     }
 
+    /**
+     * 告诉控件是一个ID Number 控件
+     */
+    private boolean mIsIDNumber;
+
+    public boolean isIDNumber() {
+        return mIsIDNumber;
+    }
+
+    public void setIDNumber(boolean isIDNumber) {
+        mIsIDNumber = isIDNumber;
+    }
 
 }
