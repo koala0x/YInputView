@@ -294,9 +294,10 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     }
 
     /**
-     * 清除错误信息
+     * 根据状态清楚信息清除错误信息
      */
-    public void clearErr() {
+    @Override
+    public void clearStatuErr() {
         hasErrStatus = false;
         mTvErr.setVisibility(View.INVISIBLE);
         if (etHasFocus) {
@@ -306,6 +307,18 @@ public class YEditTextView extends FrameLayout implements IYInputView {
             mTvHint.setTextColor(mLoseFocusColor);
             mLineView.setBackgroundColor(mLoseFocusColor);
         }
+    }
+
+    /**
+     * 清除Err并且清除状态
+     */
+    @Override
+    public void clearErr() {
+        hasErrStatus = false;
+        this.clearFocus();
+        mTvErr.setVisibility(View.INVISIBLE);
+        mTvHint.setTextColor(mLoseFocusColor);
+        mLineView.setBackgroundColor(mLoseFocusColor);
     }
 
     /**

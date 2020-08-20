@@ -14,4 +14,8 @@ public interface IYInputView {
     IYInputView getNextYInputView();
 
     int getType();
+
+    void clearStatuErr();
+
+    void clearErr();
 }
