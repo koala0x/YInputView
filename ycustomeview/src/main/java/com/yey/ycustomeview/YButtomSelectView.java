@@ -283,15 +283,32 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
     /**
      * 更改控件内容
      */
-    public void changeContent(String content) {
+    @Override
+    public void setContent(String content) {
         mTvContent.setText(content);
+    }
+
+    /**
+     * 获取控件内容
+     *
+     * @return
+     */
+    @Override
+    public String getContent() {
+        String content = mTvContent.getText().toString().trim();
+        if (mContentStr.equals(content)) {
+            return "";
+        } else {
+            return content;
+        }
     }
 
     /**
      * 清空控件内容
      */
+    @Override
     public void clearContent() {
-        mTvContent.setText(mContentStr);
+        mTvContent.setText("");
     }
 
     /**
@@ -312,7 +329,7 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
      * 根据状态清楚信息清除错误信息
      */
     @Override
-    public void clearStatuErr() {
+    public void clearFocusErr() {
         hasErrStatus = false;
         mTvErr.setVisibility(View.INVISIBLE);
         if (etHasFocus) {
@@ -335,6 +352,16 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
         mLineView.setBackgroundColor(mLoseFocusColor);
     }
 
+    @Override
+    public void requestFocusY() {
+        this.requestFocus();
+    }
+
+    @Override
+    public void clearFocusY() {
+        this.clearFocus();
+    }
+
 
     /**
      * 获取图标控件
@@ -354,7 +381,7 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
 
     // SET 方法
     @BindingAdapter("y_change_content")
-    public static void setContent(YButtomSelectView ybsv, String content) {
+    public static void setBindingContent(YButtomSelectView ybsv, String content) {
         if (ybsv != null) {
             String mCurrentStr = ybsv.mTvContent.getText().toString().trim();
             if (!TextUtils.isEmpty(content)) {
@@ -367,7 +394,7 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
 
     // GET 方法
     @InverseBindingAdapter(attribute = "y_change_content", event = "contentAttrChanged")
-    public static String getContent(YButtomSelectView ybsv) {
+    public static String getBindingContentLD(YButtomSelectView ybsv) {
         return ybsv.mTvContent.getText().toString().trim();
     }
 

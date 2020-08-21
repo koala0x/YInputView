@@ -297,7 +297,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
      * 根据状态清楚信息清除错误信息
      */
     @Override
-    public void clearStatuErr() {
+    public void clearFocusErr() {
         hasErrStatus = false;
         mTvErr.setVisibility(View.INVISIBLE);
         if (etHasFocus) {
@@ -340,6 +340,53 @@ public class YEditTextView extends FrameLayout implements IYInputView {
         // hint
         mTvHint.setTextColor(mErrColor);
     }
+
+    @Override
+    public void requestFocusY() {
+        mEtContent.requestFocus();
+    }
+
+    @Override
+    public void clearFocusY() {
+        mEtContent.clearFocus();
+    }
+
+
+    /**
+     * 更改控件内容
+     */
+    @Override
+    public void setContent(String content) {
+        mEtContent.setText(content);
+    }
+
+    /**
+     * 获取控件内容
+     *
+     * @return
+     */
+    @Override
+    public String getContent() {
+        String content = mEtContent.getText().toString().trim();
+        if (TextUtils.isEmpty(content)) {
+            return "";
+        } else {
+            if (content.equals(mContentStr)) {
+                return "";
+            } else {
+                return content;
+            }
+        }
+    }
+
+    /**
+     * 清空控件内容
+     */
+    @Override
+    public void clearContent() {
+        mEtContent.setText("");
+    }
+
 
     // SET 方法
     @BindingAdapter("y_change_content")

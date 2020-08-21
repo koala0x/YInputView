@@ -3,7 +3,9 @@ package com.yey.ycustomeview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +16,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 import com.yey.ycustomeview.Yinterface.IYInputView;
 import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YButtomView extends FrameLayout implements IYInputView {
-    private static String mContentStr;
+    private static String mHintStr;
     private int mContentColor;
     private int mSizeImage;
     private String mErrStr;
@@ -29,7 +34,9 @@ public class YButtomView extends FrameLayout implements IYInputView {
     private int mLoseFocusColor;
     // 获取焦点时候提示颜色
     private int mGetFocusColor;
-    private TextView mTvContent;
+    private TextView mTvHint;
+    // 用来临时保存数据用的
+    private TextView mTvTempContent;
     private TextView mTvErr;
     private View mLineView;
     private ImageView mIvImage;
@@ -78,7 +85,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
 
     private void initXmlParams(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YButtomView, defStyleAttr, 0);
-        mContentStr = typedArray.getString(R.styleable.YButtomView_y_content_desc);
+        mHintStr = typedArray.getString(R.styleable.YButtomView_y_content_desc);
         mContentColor = typedArray.getColor(R.styleable.YButtomView_y_et_content_color, Color.BLACK);
         mErrStr = typedArray.getString(R.styleable.YButtomView_y_err_desc);
         mErrColor = typedArray.getColor(R.styleable.YButtomView_y_tv_err_color, Color.RED);
@@ -101,9 +108,11 @@ public class YButtomView extends FrameLayout implements IYInputView {
         this.setFocusableInTouchMode(true);
         this.setClickable(true);
         LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this, true);
-        mTvContent = (TextView) findViewById(R.id.tv_y_content);
-        mTvContent.setText(mContentStr);
-        mTvContent.setTextColor(mContentColor);
+        mTvHint = (TextView) findViewById(R.id.tv_ybv_hint);
+        mTvHint.setText(mHintStr);
+        mTvHint.setTextColor(mContentColor);
+
+        mTvTempContent = (TextView) findViewById(R.id.tv_temp_content);
 
         mTvErr = (TextView) findViewById(R.id.tv_y_err);
         mTvErr.setText(mErrStr);
@@ -228,7 +237,6 @@ public class YButtomView extends FrameLayout implements IYInputView {
     }
 
 
-
     /**
      * 设置控件为错误状态
      */
@@ -244,7 +252,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
      * 根据状态清楚信息清除错误信息
      */
     @Override
-    public void clearStatuErr() {
+    public void clearFocusErr() {
         hasErrStatus = false;
         mTvErr.setVisibility(View.INVISIBLE);
         if (etHasFocus) {
@@ -264,6 +272,79 @@ public class YButtomView extends FrameLayout implements IYInputView {
         mLineView.setBackgroundColor(mLoseFocusColor);
     }
 
+    @Override
+    public void requestFocusY() {
+        this.requestFocus();
+    }
+
+    @Override
+    public void clearFocusY() {
+        this.clearFocus();
+    }
+
+    /**
+     * 更改控件内容
+     */
+    @Override
+    public void setContent(String content) {
+        mTvTempContent.setText(content);
+    }
+
+    /**
+     * 获取控件内容
+     *
+     * @return
+     */
+    @Override
+    public String getContent() {
+        return mTvTempContent.getText().toString().trim();
+    }
+
+    /**
+     * 清空控件内容
+     */
+    @Override
+    public void clearContent() {
+        mTvTempContent.setText("");
+    }
+
+    // SET 方法
+    @BindingAdapter("y_change_content")
+    public static void setBindingContent(YButtomView ybv, String content) {
+        if (ybv != null) {
+            String mCurrentStr = ybv.mTvTempContent.getText().toString().trim();
+            if (!TextUtils.isEmpty(content) && !content.equalsIgnoreCase(mCurrentStr)) {
+                ybv.mTvTempContent.setText(content);
+            }
+        }
+    }
+
+    // GET 方法
+    @InverseBindingAdapter(attribute = "y_change_content", event = "contentAttrChanged")
+    public static String getBindingContentLD(YButtomView ybv) {
+        return ybv.mTvTempContent.getText().toString().trim();
+    }
+
+    // 监听,如果有变动就调用listener中的onChange方法
+    @BindingAdapter(value = "contentAttrChanged", requireAll = false)
+    public static void setContentChangeListener(YButtomView ybv, InverseBindingListener listener) {
+        ybv.mTvTempContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listener.onChange();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
 
     /**
      * 获取图标控件
@@ -272,7 +353,4 @@ public class YButtomView extends FrameLayout implements IYInputView {
         return mIvImage;
     }
 
-    public TextView getTvContent() {
-        return mTvContent;
-    }
 }
