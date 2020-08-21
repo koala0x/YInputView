@@ -53,7 +53,7 @@ public class YButtomSelectViewActivity extends AppCompatActivity {
         binding.btnChageContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.ybsv1.changeContent("改变了内容");
+                binding.ybsv1.setContent("改变了内容");
             }
         });
         binding.btnClearContent.setOnClickListener(new View.OnClickListener() {

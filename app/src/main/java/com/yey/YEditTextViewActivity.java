@@ -68,8 +68,9 @@ public class YEditTextViewActivity extends AppCompatActivity {
         binding.cetv1.setKeyboardNextListener(new YEditTextView.KeyboardNextListener() {
             @SuppressLint("LongLogTag")
             @Override
-            public void nextEvent() {
+            public boolean nextEvent() {
                 Log.e(TAG, "cetv1 用户点击了下一步按钮");
+                return false;
             }
         });
 

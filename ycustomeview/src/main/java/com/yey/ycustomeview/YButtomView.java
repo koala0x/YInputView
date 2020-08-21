@@ -107,7 +107,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
         this.setClickable(true);
-        LayoutInflater.from(context).inflate(R.layout.layout_y_buttomview, this, true);
+        LayoutInflater.from(context).inflate(R.layout.layout_y_buttom_view, this, true);
         mTvHint = (TextView) findViewById(R.id.tv_ybv_hint);
         mTvHint.setText(mHintStr);
         mTvHint.setTextColor(mContentColor);
