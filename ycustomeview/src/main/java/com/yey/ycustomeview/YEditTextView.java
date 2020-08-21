@@ -36,7 +36,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     private TextView mTvHint;
     private String mErrStr;
     private String mHintStr;
-    private static String mContentStr;
+    private  String mContentStr;
     private int mErrColor;
     // 失去焦点时候提示颜色
     private int mLoseFocusColor;

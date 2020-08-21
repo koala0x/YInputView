@@ -26,7 +26,7 @@ import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YButtomSelectView extends FrameLayout implements IYInputView {
     private static final String TAG1 = "YButtomSelectView";
-    private static String mContentStr;
+    private String mContentStr;
     private int mContentColor;
     private int mContentChangeColor;
     private String mErrStr;

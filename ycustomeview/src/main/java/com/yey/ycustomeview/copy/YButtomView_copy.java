@@ -19,7 +19,7 @@ import com.yey.ycustomeview.R;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YButtomView_copy extends FrameLayout {
-    private static String mContentStr;
+    private  String mContentStr;
     private int mContentColor;
     private String mErrStr;
     private int mErrColor;
