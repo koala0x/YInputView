@@ -38,14 +38,13 @@
             tools:text="头 "
             android:textColor="@android:color/black"
             android:textSize="14sp" />
-
+<!--        android:focusable="true"-->
+<!--        android:focusableInTouchMode="true"-->
         <EditText
             android:id="@+id/et_y_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:gravity="bottom"
             android:imeOptions="actionNext"
             android:singleLine="true"

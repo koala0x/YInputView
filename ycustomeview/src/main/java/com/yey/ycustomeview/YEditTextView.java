@@ -89,8 +89,6 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     // 初始化View
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_y_edite_text_view, this, true);
-
-
         // 设置内容
         mEtContent = (EditText) findViewById(R.id.et_y_content);
         mEtContent.setTextColor(mEtContentColor);
@@ -212,7 +210,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
         mEtContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_NEXT && mKeyboardNextListener != null) {
+                if ((actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) && mKeyboardNextListener != null) {
                     // 用户点击了键盘的下一步按钮
                     if (mKeyboardNextListener.nextEvent()) {
                         return true; // 保留软键盘

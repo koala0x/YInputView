@@ -104,7 +104,6 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
         this.setClickable(true);
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
-        this.setClickable(true);
         LayoutInflater.from(context).inflate(R.layout.layout_y_buttom_select_view, this, true);
         mTvContent = (TextView) findViewById(R.id.tv_y_content);
         mTvContent.setText(mContentStr);
