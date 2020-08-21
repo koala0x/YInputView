@@ -35,6 +35,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation project(path: ':ycustomeview')
-    // implementation 'com.yey:ycustomeview:1.3.3'
+    // implementation 'com.yey:ycustomeview:1.3.7'
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
 }
