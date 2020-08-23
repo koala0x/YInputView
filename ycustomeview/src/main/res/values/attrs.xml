@@ -29,6 +29,8 @@
         <attr name="y_get_focus" />
         <!--        提示文字内容-->
         <attr name="y_hint_desc" format="string|reference" />
+        <!--        获取焦点以后的提示文字内容-->
+        <attr name="y_focus_hint_desc" format="string|reference" />
         <!--        输入字符的长度-->
         <attr name="maxLength" format="integer" min="0" />
         <!--        图片资源-->

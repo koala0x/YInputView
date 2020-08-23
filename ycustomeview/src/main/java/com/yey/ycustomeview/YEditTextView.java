@@ -35,7 +35,10 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     private TextView mTvErr;
     private TextView mTvHint;
     private String mErrStr;
+    // 没有获取焦点时候的提示
     private String mHintStr;
+    // 已经获取焦点时候的提示
+    private String mFocusHintStr;
     private  String mContentStr;
     private int mErrColor;
     // 失去焦点时候提示颜色
@@ -75,6 +78,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YEditTextView, defStyleAttr, 0);
         mErrStr = typedArray.getString(R.styleable.YEditTextView_y_err_desc);
         mHintStr = typedArray.getString(R.styleable.YEditTextView_y_hint_desc);
+        mFocusHintStr = typedArray.getString(R.styleable.YEditTextView_y_focus_hint_desc);
         mContentStr = typedArray.getString(R.styleable.YEditTextView_y_content_desc);
         mErrColor = typedArray.getColor(R.styleable.YEditTextView_y_tv_err_color, Color.RED);
         mLoseFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_lose_focus, Color.GRAY);
@@ -141,7 +145,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
                     // 1. EditText hint提示取消
                     // 2. TextView提示控件显示,文字色高亮,内容为XML中设置的提示文字
                     // 3. 分割线背景色高亮
-                    mEtContent.setHint("");
+                    mEtContent.setHint(mFocusHintStr);
 
                     mTvHint.setVisibility(VISIBLE);
                     mTvHint.setTextColor(mGetFocusColor);

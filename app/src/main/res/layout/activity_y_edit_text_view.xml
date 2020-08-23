@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:inputType="phone"
+            app:y_focus_hint_desc="获取焦点以后的提示"
             app:maxLength="3"
             app:y_change_content="@={mVM.mContentMLD1}"
             app:y_err_desc="错误"
