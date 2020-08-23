@@ -81,6 +81,11 @@ public class YButtomViewActivity extends AppCompatActivity {
                 Log.e(TAG1, "ybtn2 获取焦点第" + count + "次回调");
             }
         });
-
+        binding.btnShowLoading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.ybtn1.getLoadingIcon().setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

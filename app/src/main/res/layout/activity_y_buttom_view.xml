@@ -20,20 +20,22 @@
             android:id="@+id/ybtn_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:image_size="5dp"
+            app:image_size="20dp"
             app:y_content_desc="牌照"
             app:y_err_desc="错误"
-            app:y_image_id="@drawable/kk" />
+            app:y_image_id="@drawable/kk"
+            app:y_progress_loading_color="@color/colorPrimary" />
 
 
         <com.yey.ycustomeview.YButtomView
             android:id="@+id/ybtn_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:image_size="5dp"
+            app:image_size="20dp"
             app:y_content_desc="牌照2"
             app:y_err_desc="错误2"
-            app:y_image_id="@drawable/kk" />
+            app:y_image_id="@drawable/kk"
+            app:y_progress_loading_color="@color/colorPrimary" />
 
         <Button
             android:id="@+id/btn_show_err"
@@ -55,6 +57,12 @@
 
         <Button
             android:id="@+id/btn_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通知YButtomView点击事件" />
+
+        <Button
+            android:id="@+id/btn_show_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="通知YButtomView点击事件" />

@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="4dp"
@@ -34,18 +34,21 @@
             android:id="@+id/iv_image"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right|bottom"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:scaleType="fitEnd" />
 
         <ProgressBar
             android:id="@+id/pb_loading"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right|bottom"
-            android:indeterminateTint="@android:color/holo_blue_dark"
-            android:visibility="gone" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:indeterminateTint="@android:color/black"
+            android:visibility="visible" />
 
-    </FrameLayout>
+    </RelativeLayout>
 
 
     <View

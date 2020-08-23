@@ -123,18 +123,6 @@ public class YButtomView extends FrameLayout implements IYInputView {
 
         mTvTempContent = (TextView) findViewById(R.id.tv_temp_content);
 
-        mPbLoanding = (ProgressBar) findViewById(R.id.pb_loading);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            int[][] states = new int[1][];
-//            states[0] = new int[android.R.attr.state_window_focused];
-//            int[] colors = new int[]{mProgressLoadingColor};
-//            mPbLoanding.setIndeterminateTintList(new ColorStateList(states, colors));
-//        } else {
-//            mPbLoanding.setBackgroundColor(mProgressLoadingColor);
-//        }
-        // https://www.jianshu.com/p/857929af1403
-        mPbLoanding.getIndeterminateDrawable().setColorFilter(mProgressLoadingColor, PorterDuff.Mode.SRC_IN);
 
         mTvErr = (TextView) findViewById(R.id.tv_y_err);
         mTvErr.setText(mErrStr);
@@ -145,6 +133,9 @@ public class YButtomView extends FrameLayout implements IYInputView {
         mLineView = (View) findViewById(R.id.v_y_line);
         mLineView.setBackgroundColor(mLoseFocusColor);
 
+        mPbLoanding = (ProgressBar) findViewById(R.id.pb_loading);
+        // https://www.jianshu.com/p/857929af1403
+        mPbLoanding.getIndeterminateDrawable().setColorFilter(mProgressLoadingColor, PorterDuff.Mode.SRC_IN);
         mIvImage = (ImageView) findViewById(R.id.iv_image);
         if (mImageResourceId != 0) {
             mIvImage.setImageResource(mImageResourceId);
@@ -153,7 +144,18 @@ public class YButtomView extends FrameLayout implements IYInputView {
             ViewGroup.LayoutParams layoutParams = mIvImage.getLayoutParams();
             layoutParams.width = mSizeImage;
             mIvImage.setLayoutParams(layoutParams);
+            mPbLoanding.setLayoutParams(layoutParams);
         }
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            int[][] states = new int[1][];
+//            states[0] = new int[android.R.attr.state_window_focused];
+//            int[] colors = new int[]{mProgressLoadingColor};
+//            mPbLoanding.setIndeterminateTintList(new ColorStateList(states, colors));
+//        } else {
+//            mPbLoanding.setBackgroundColor(mProgressLoadingColor);
+//        }
     }
 
     private void initListener() {
