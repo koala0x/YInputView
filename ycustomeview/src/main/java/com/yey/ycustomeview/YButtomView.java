@@ -136,6 +136,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
         mPbLoanding = (ProgressBar) findViewById(R.id.pb_loading);
         // https://www.jianshu.com/p/857929af1403
         mPbLoanding.getIndeterminateDrawable().setColorFilter(mProgressLoadingColor, PorterDuff.Mode.SRC_IN);
+
         mIvImage = (ImageView) findViewById(R.id.iv_image);
         if (mImageResourceId != 0) {
             mIvImage.setImageResource(mImageResourceId);
@@ -144,7 +145,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
             ViewGroup.LayoutParams layoutParams = mIvImage.getLayoutParams();
             layoutParams.width = mSizeImage;
             mIvImage.setLayoutParams(layoutParams);
-            mPbLoanding.setLayoutParams(layoutParams);
+            // mPbLoanding.setLayoutParams(layoutParams);
         }
 
 
