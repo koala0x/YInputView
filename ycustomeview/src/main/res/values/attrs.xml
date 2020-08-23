@@ -188,6 +188,9 @@
         <attr name="y_image_id" />
         <!--        图片大小-->
         <attr name="image_size" />
+
+        <!--        loading颜色-->
+        <attr name="y_progress_loading_color" format="color|reference" />
     </declare-styleable>
 
 

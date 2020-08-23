@@ -37,6 +37,14 @@
             android:layout_gravity="right|bottom"
             android:scaleType="fitEnd" />
 
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|bottom"
+            android:indeterminateTint="@android:color/holo_blue_dark"
+            android:visibility="gone" />
+
     </FrameLayout>
 
 

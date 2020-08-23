@@ -1,8 +1,11 @@
 package com.yey.ycustomeview;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +41,11 @@ public class YButtomView extends FrameLayout implements IYInputView {
     private TextView mTvHint;
     // 用来临时保存数据用的
     private TextView mTvTempContent;
+    // 用来显示加载图片loading用的
+    private ProgressBar mPbLoanding;
+    private int mProgressLoadingColor;
+
+
     private TextView mTvErr;
     private View mLineView;
     private ImageView mIvImage;
@@ -87,6 +96,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YButtomView, defStyleAttr, 0);
         mHintStr = typedArray.getString(R.styleable.YButtomView_y_content_desc);
         mContentColor = typedArray.getColor(R.styleable.YButtomView_y_et_content_color, Color.BLACK);
+        mProgressLoadingColor = typedArray.getColor(R.styleable.YButtomView_y_progress_loading_color, Color.BLUE);
         mErrStr = typedArray.getString(R.styleable.YButtomView_y_err_desc);
         mErrColor = typedArray.getColor(R.styleable.YButtomView_y_tv_err_color, Color.RED);
         mLoseFocusColor = typedArray.getColor(R.styleable.YButtomView_y_lose_focus, Color.GRAY);
@@ -112,6 +122,19 @@ public class YButtomView extends FrameLayout implements IYInputView {
         mTvHint.setTextColor(mContentColor);
 
         mTvTempContent = (TextView) findViewById(R.id.tv_temp_content);
+
+        mPbLoanding = (ProgressBar) findViewById(R.id.pb_loading);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            int[][] states = new int[1][];
+//            states[0] = new int[android.R.attr.state_window_focused];
+//            int[] colors = new int[]{mProgressLoadingColor};
+//            mPbLoanding.setIndeterminateTintList(new ColorStateList(states, colors));
+//        } else {
+//            mPbLoanding.setBackgroundColor(mProgressLoadingColor);
+//        }
+        // https://www.jianshu.com/p/857929af1403
+        mPbLoanding.getIndeterminateDrawable().setColorFilter(mProgressLoadingColor, PorterDuff.Mode.SRC_IN);
 
         mTvErr = (TextView) findViewById(R.id.tv_y_err);
         mTvErr.setText(mErrStr);
@@ -350,6 +373,13 @@ public class YButtomView extends FrameLayout implements IYInputView {
      */
     public ImageView getIcon() {
         return mIvImage;
+    }
+
+    /**
+     * 获取加载loading 控件
+     */
+    public ProgressBar getLoadingIcon() {
+        return mPbLoanding;
     }
 
 }
