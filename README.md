@@ -1,172 +1,81 @@
 ## YInputView
-> 最近接手的项目输入控件需求较特殊,我花时间自己写了两个组合控件,比较有特色一点是用`BindingAdapter`,实现了双向绑定.想了解双向绑定可以看代码中的实现或者这篇[文章](https://blog.csdn.net/MoLiao2046/article/details/107977255)
+> 最近接手的项目输入控件需求较特殊,自己写了两个组合控件,比较有特色一点是用`BindingAdapter`,实现了双向绑定.想了解双向绑定可以看代码中的实现或者这篇[文章](https://blog.csdn.net/MoLiao2046/article/details/107977255)
 #### 属性介绍
 - 公共属性
 
-|属性   |   解释   |
-|-------|--------|
+|属性和API|解释|
+|--------|---|
 |y_content_desc|控件的文字内容|
 |y_et_content_color|控件的文字内容颜色|
 |y_err_desc|控件错误提示文字内容|
 |y_tv_err_color|控件错误提示文字内容颜色|
 |y_lose_focus|控件失去焦点的颜色|
 |y_get_focus|控件获取焦点的颜色|
-|y_err_status|实现单向绑定数据,动态展示错误信息|
+|setErr()|为控件设置错误信息|
+|setErr(String err)|为控件设置错误信息|
+|nextYInputView(IYInputView iyInputView)|设置下一个IYInputView控件的地址,这样可以将所有控件组合成一个单链表|
+|getNextYInputView()|获取下一个IYInputView控件的地址|
+|getType()|获取该控件的类型|
+|clearFocusErr()|根据控件状态清除错误信息|
+|clearErr()|清除错误信息并清除焦点|
+|requestFocusY()|控件请求获取焦点方法|
+|clearFocusY()|控件清除焦点方法|
 
-- `YEditTextView`控件特有属性
+- `YEditTextView`控件特有属性和API
 
-|属性   |   解释   |
-|-------|--------|
+|属性和API|解释|
+|--------|-----|
 |y_hint_desc|控件正常提示文字内容|
-|y_content|实现双向绑定数据,动态更新获取控件数据|
-|y_notify_focus|通过`LiveData`动态实现控件主动获取焦点和失去焦点|
+|y_focus_hint_desc|控件获取焦点后提示的文字内容|
 |maxLength|控件能够输入的最大内容长度|
 |inputType|控件输入内容的类型,如:NUMBER,TEXT,PHONE|
+|y_change_content|实现双向绑定数据,动态更新和获取控件数据|
+|getEditText()|获取控件中的EditTextView控件|
+|getContentHead()|获取EditTextView左侧的TextView,一般做提示用|
+|setTextChangedListener()|为EditTextView设置TextWatcher文本改变监听|
+|setFocusHintContent()|设置控件获取焦点时候的提示内容|
+|setKeyboardNextListener()|监听该控件弹出键盘的下一步按键操作|
+|setIDNumber()|设置该控件为证件号输入控件|
+|isIDNumber()|判断控件是否是证件号控件|
+|getFocusStatus()|得到当前控件是否获取焦点|
+|setContent(String content)|为EditTextView设置内容|
+|getContent()|获取EditTextView的内容|
+|clearContent()|清除EditTextView的内容|
 
-- `YButtomView`控件特有属性
+- `YButtomView`控件特有属性和API
 
-|属性   |   解释   |
-|-------|--------|
+|属性和API|解释|
+|--------|-----|
 |y_image_id|手动设置控件图片资源id|
-|y_image_url|实现单向绑定数据,动态展示不同Image资源|
-|y_notify_click_focus|通过`LiveData`动态实现控件获取焦点失去焦点,并且获取焦点的时候会进行事件回调|
+|image_size|控件图片大小|
+|y_progress_loading_color|控件加载图片时候展示出来的Progressbar的颜色|
+|y_image_url|实现双向绑定数据,动态更新图片链接|
+|setContent(String content)|存储新的图片链接到控件中记录|
+|getContent()|获取控件中的图片链接|
+|clearContent()|清除控件中的图片链接|
+|setYBVListener()|为控件设置点击和获取焦点的监听|
+|YBVListener.onClick()|控件被点击时候的回调|
+|YBVListener.getFocuse()|控件获取焦点时候的回调|
+|getIcon()|获取控件中ImageView图片ID|
+|getLoadingIcon()|获取ProgressBar加载动画,当Glide加载图片的时候就可以将ProgressBar显示出来|
+
+- `YButtomSelectView`控件特有属性和API
+
+|属性和API|解释|
+|--------|-----|
+|y_image_id|手动设置控件图片资源id|
+|image_size|控件图片大小|
+|y_change_content|实现双向绑定数据,动态更新和获取控件数据|
+|y_content_change_color|内容改变之后控件的字体颜色|
+|setYBSVListener()|为控件设置点击和获取焦点的监听|
+|YBSVListener.onClick()|控件被点击时候的回调|
+|YBSVListener.getFocuse()|控件获取焦点时候的回调|
+|setContent(String content)|更改控件中的文字内容|
+|getContent()|获取控件中的文字内容|
+|clearContent()|清除控件中的文字内容|
+|getIcon()|获取控件中ImageView图片ID|
+|getTvContent()|获取控件中TextView内容控件ID|
 #### 依赖
 ```groovy
-implementation 'com.yey:ycustomeview:1.0.4'
+implementation 'com.yey:ycustomeview:1.4.0'
 ```
-#### `YEditTextView`简单使用
-- XML
-```xml
-<data>
-    <variable
-        name="mVM"
-        type="com.yey.vm.MyVM" />
-</data>
-<com.yey.ycustomeview.YEditTextView
-    android:id="@+id/cetv_1"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    app:y_content="@={mVM.mContentMLD1}"
-    app:y_err_status="@{mVM.mErrStatus}"
-    app:y_notify_focus="@{mVM.mNotifyClick}"
-    app:y_err_desc="错误"
-    app:y_get_focus="@android:color/holo_orange_dark"
-    app:y_hint_desc="提示" />
-```
-
-1. `app:y_content="@={mVM.mContentMLD1}"`和`app:y_err_status="@{mVM.mErrStatus}"`使用`DataBinding`进行数据绑定.
-2. `app:y_notify_focus="@{mVM.mNotifyClick}"`通过`ObservableField<Boolean>`动态实现获取焦点失去焦点
-
-- 代码使用
-```java
-// ViewModel.java
-public class MyVM extends ViewModel {
-    public MutableLiveData<String> mContentMLD1;
-    public MutableLiveData<Boolean> mErrStatus;
-    public ObservableField<Boolean> mNotify;
-    public MyVM() {
-        mContentMLD1 = new MutableLiveData<>();
-        mErrStatus = new MutableLiveData<>();
-        mNotify = new ObservableField<>(false);
-    }
-}
-// MainActivity.java
-public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        myVM = new ViewModelProvider(this).get(MyVM.class);
-        mainBinding.setMVM(myVM);
-        // 更新YEditTextView内容
-        myVM.mContentMLD1.setValue("1");
-        // 展示YEditTextView中的错误提示
-        myVM.mErrStatus.setValue(true);
-        // 获取焦点
-        myVM.mNotify.set(!myVM.mNotify.get().booleanValue());
-    }
-}
-```
-手动展示错误有两个API可以使用
-```java
-YEditTextView.setErr()
-YEditTextView.setErr(String err)
-```
-清除错误提示API
-```java
-YEditTextView.clearErr()
-```
-#### `YButtomView`简单使用
-- XML
-```xml
-<data>
-    <variable
-        name="mVM"
-        type="com.yey.vm.MyVM" />
-</data>
-<com.yey.ycustomeview.YButtomView
-    android:id="@+id/ybtn_1"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    app:y_content_desc="内容"
-    app:y_err_desc="错误提示"
-    app:y_notify_focus="@{mVM.mNotifyClick}"
-    app:y_err_status="@{mVM.mErrStatus}"
-    app:y_image_url="@{mVM.mLoadImageUrl}"
-    app:y_image_id="@drawable/kk"/>
-```
-
-1. `app:y_err_status="@{mVM.mErrStatus}"`和`app:y_image_url="@{mVM.mLoadImageUrl}"`使用`DataBinding`进行数据绑定,可以动态的更新`YButtomView`的错误提示和图片.
-2. app:y_notify_focus="@{mVM.mNotifyClick}"通过`ObservableField<Boolean>`动态实现获取焦点失去焦点,获取焦点时候能发出一个回调事件.
-
-- 代码使用
-```java
-// ViewModel.java
-public class MyVM extends ViewModel {
-    public MutableLiveData<String> mLoadImageUrl;
-    public MutableLiveData<Boolean> mErrStatus;
-    public ObservableField<Boolean> mNotifyClick;
-    public MyVM() {
-       mLoadImageUrl = new MutableLiveData<>();
-       mErrStatus = new MutableLiveData<>();
-       mNotifyClick = new ObservableField<>(false);
-    }
-}
-// MainActivity.java
-public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        myVM = new ViewModelProvider(this).get(MyVM.class);
-        mainBinding.setMVM(myVM);
-        // 更新YEditTextView内容
-        myVM.mContentMLD1.setValue("1");
-        // 更新YButtomView中的目标图片
-        myVM.mLoadImageUrl.setValue("https://xxx.com/image...");
-        // 因为加载网络图片有很多框架,所以将加载图片的操作暴露出来,这样可以使用不同的加载图片框架了.
-        mainBinding.ybtn1.setYLoadImageListener(new YButtomView.YLoadImageListener() {
-            @Override
-            public void loadHtpp(ImageView imageView, String url) {
-                Log.e(TAG, "网络加载图片"+url);
-            }
-            @Override
-            public void loadLocal(ImageView imageView, String url) {
-                Log.e(TAG, "本地加载图片 比如Cache缓存中的图片 file//xxx.png"+url);
-            }
-        });
-        // 通过ObservableField来让控件主动获取焦点
-        myVM.mNotifyClick.set(!myVM.mNotifyClick.get().booleanValue());
-    }
-}
-```
-当`YButtomView`控件获取到焦点时候,回主动的回调`onClick(boolean isFocus)`,主动点击`YButtomView`控件也会回调该方法,通过`isFocus`参数来区分回调是点击事件还是通过`ObservableField<Boolean>`发出的.
-```java
-mainBinding.ybtn2.setYClickListener(new YButtomView.YClickListener() {
-    @Override
-    public void onClick(boolean isFocus) {
-        if (isFocus) {
-            Log.e(TAG, "ybtn2 LiveData通知的回调");
-        } else {
-            Log.e(TAG, "ybtn2 点击时候调用");
-        }
-    }
-});
-```
-

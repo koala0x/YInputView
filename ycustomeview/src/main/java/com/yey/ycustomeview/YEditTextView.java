@@ -39,7 +39,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     private String mHintStr;
     // 已经获取焦点时候的提示
     private String mFocusHintStr;
-    private  String mContentStr;
+    private String mContentStr;
     private int mErrColor;
     // 失去焦点时候提示颜色
     private int mLoseFocusColor;
@@ -96,10 +96,11 @@ public class YEditTextView extends FrameLayout implements IYInputView {
         // 设置内容
         mEtContent = (EditText) findViewById(R.id.et_y_content);
         mEtContent.setTextColor(mEtContentColor);
-        mEtContent.setText(mContentStr);
         mEtContent.setHintTextColor(mLoseFocusColor);
         if (TextUtils.isEmpty(mContentStr)) {
             mEtContent.setHint(mHintStr);
+        } else {
+            mEtContent.setText(mContentStr);
         }
         mEtContent.setInputType(mInputType);
         if (mMaxLength > 0) {
@@ -387,6 +388,16 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     @Override
     public void clearContent() {
         mEtContent.setText("");
+    }
+
+
+    /**
+     * 设置控件获取焦点时候的提示语
+     *
+     * @param focusHintContent
+     */
+    public void setFocusHintContent(String focusHintContent) {
+        mFocusHintStr = focusHintContent;
     }
 
 

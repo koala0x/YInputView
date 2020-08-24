@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--        按钮文字内容-->
+    <!--        控件文字内容-->
     <attr name="y_content_desc" format="string|reference" />
-    <!--        按钮文字颜色-->
+    <!--        控件的文字内容颜色-->
     <attr name="y_et_content_color" format="color|reference" />
     <!--        错误提示内容-->
     <attr name="y_err_desc" format="string|reference" />
@@ -14,6 +14,9 @@
     <attr name="y_get_focus" format="color|reference" />
     <!--        图片大小-->
     <attr name="image_size" format="dimension|reference" />
+    <!--        图片资源-->
+    <attr name="y_image_id" format="reference" />
+
     <declare-styleable name="YEditTextView">
         <!--        EditText中文字内容-->
         <attr name="y_content_desc" />
@@ -33,8 +36,6 @@
         <attr name="y_focus_hint_desc" format="string|reference" />
         <!--        输入字符的长度-->
         <attr name="maxLength" format="integer" min="0" />
-        <!--        图片资源-->
-        <attr name="y_image_id" format="reference" />
         <!--        输入内容的类型-->
         <attr name="inputType">
             <!-- There is no content type.  The text is not editable. -->
@@ -211,10 +212,8 @@
         <attr name="y_get_focus" />
         <!--        图片资源-->
         <attr name="y_image_id" />
-
         <!--        内容改变之后,TextView 字体颜色-->
         <attr name="y_content_change_color" format="color|reference" />
-
         <!--        图片大小-->
         <attr name="image_size" />
     </declare-styleable>

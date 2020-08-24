@@ -334,7 +334,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
     }
 
     // SET 方法
-    @BindingAdapter("y_change_content")
+    @BindingAdapter("y_image_url")
     public static void setBindingContent(YButtomView ybv, String content) {
         if (ybv != null) {
             String mCurrentStr = ybv.mTvTempContent.getText().toString().trim();
@@ -345,7 +345,7 @@ public class YButtomView extends FrameLayout implements IYInputView {
     }
 
     // GET 方法
-    @InverseBindingAdapter(attribute = "y_change_content", event = "contentAttrChanged")
+    @InverseBindingAdapter(attribute = "y_image_url", event = "contentAttrChanged")
     public static String getBindingContentLD(YButtomView ybv) {
         return ybv.mTvTempContent.getText().toString().trim();
     }

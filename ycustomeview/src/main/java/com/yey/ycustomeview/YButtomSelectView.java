@@ -308,6 +308,8 @@ public class YButtomSelectView extends FrameLayout implements IYInputView {
     @Override
     public void clearContent() {
         mTvContent.setText("");
+        mTvContent.setText(mContentStr);
+
     }
 
     /**
