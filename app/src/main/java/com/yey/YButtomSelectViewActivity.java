@@ -50,10 +50,10 @@ public class YButtomSelectViewActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnChageContent.setOnClickListener(new View.OnClickListener() {
+        binding.btnContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.ybsv1.setContent("改变了内容");
+                binding.ybshav3.setContent("QWEQWERTYUIOP{ASDFGHJKLZXCVBNM<WERTYUIOPSDFGHJKLSDFGHJKLSDFGHJKLQWEQWERTYUIOP{ASDFGHJKLZXCVBNM<WERTYUIOPSDFGHJKLSDFGHJKLSDFGHJKLQWEQWERTYUIOP{ASDFGHJKLZXCVBNM<WERTYUIOPSDFGHJKLSDFGHJKLSDFGHJKL水门");
             }
         });
         binding.btnClearContent.setOnClickListener(new View.OnClickListener() {

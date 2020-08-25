@@ -87,5 +87,7 @@ public class YButtomViewActivity extends AppCompatActivity {
                 binding.ybtn1.getLoadingIcon().setVisibility(View.VISIBLE);
             }
         });
+
+
     }
 }
