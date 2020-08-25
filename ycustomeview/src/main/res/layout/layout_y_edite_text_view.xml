@@ -48,7 +48,6 @@
             android:gravity="bottom"
             android:imeOptions="actionNext"
             android:singleLine="true"
-            android:text="测试"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             tools:text="内容" />
