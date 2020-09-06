@@ -306,6 +306,8 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         mTvErr.setVisibility(View.VISIBLE);
         // line
         mLineView.setBackgroundColor(mErrColor);
+        // hint
+        mTvHint.setTextColor(mErrColor);
     }
 
     /**
@@ -316,8 +318,10 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         hasErrStatus = false;
         mTvErr.setVisibility(View.INVISIBLE);
         if (etHasFocus) {
+            mTvHint.setTextColor(mGetFocusColor);
             mLineView.setBackgroundColor(mGetFocusColor);
         } else {
+            mTvHint.setTextColor(mLoseFocusColor);
             mLineView.setBackgroundColor(mLoseFocusColor);
         }
     }
@@ -329,6 +333,7 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         hasErrStatus = false;
         this.clearFocus();
         mTvErr.setVisibility(View.INVISIBLE);
+        mTvHint.setTextColor(mLoseFocusColor);
         mLineView.setBackgroundColor(mLoseFocusColor);
     }
 
@@ -405,21 +410,6 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         });
     }
 
-
-    /**
-     * 获取图标控件
-     */
-    public ImageView getIcon() {
-        return mIvImage;
-    }
-
-    /**
-     * 获取加载loading 控件
-     */
-    public ProgressBar getLoadingIcon() {
-        return mPbLoanding;
-    }
-
     // SET 方法
     @BindingAdapter("y_change_content")
     public static void setBindingContent(YImageSelectTextView ybsv, String content) {
@@ -457,6 +447,21 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
 
             }
         });
+    }
+
+
+    /**
+     * 获取图标控件
+     */
+    public ImageView getIcon() {
+        return mIvImage;
+    }
+
+    /**
+     * 获取加载loading 控件
+     */
+    public ProgressBar getLoadingIcon() {
+        return mPbLoanding;
     }
 
 }
