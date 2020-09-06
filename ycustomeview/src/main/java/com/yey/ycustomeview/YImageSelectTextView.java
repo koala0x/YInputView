@@ -385,13 +385,13 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
     }
 
     // GET 方法
-    @InverseBindingAdapter(attribute = "y_image_url", event = "contentAttrChanged")
+    @InverseBindingAdapter(attribute = "y_image_url", event = "ImageUrlAttrChanged")
     public static String getImageUrlLD(YImageSelectTextView ybv) {
         return ybv.mTvContent.getText().toString().trim();
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
-    @BindingAdapter(value = "contentAttrChanged", requireAll = false)
+    @BindingAdapter(value = "ImageUrlAttrChanged", requireAll = false)
     public static void setImageUrlListener(YImageSelectTextView ybv, InverseBindingListener listener) {
         ybv.mTvContent.addTextChangedListener(new TextWatcher() {
             @Override
