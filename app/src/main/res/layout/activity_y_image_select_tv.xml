@@ -7,7 +7,7 @@
 
         <variable
             name="mVM"
-            type="com.yey.vm.YSelectTextViewVM" />
+            type="com.yey.vm.YImageSelectTextViewVM" />
     </data>
 
     <LinearLayout

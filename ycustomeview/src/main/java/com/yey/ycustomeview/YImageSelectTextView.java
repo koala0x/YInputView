@@ -347,7 +347,7 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
      */
     @Override
     public void setContent(String content) {
-        mTvHint.setText(content);
+        mTvContent.setText(content);
     }
 
     /**
@@ -357,7 +357,7 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
      */
     @Override
     public String getContent() {
-        return mTvHint.getText().toString().trim();
+        return mTvContent.getText().toString().trim();
     }
 
     /**
@@ -365,16 +365,16 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
      */
     @Override
     public void clearContent() {
-        mTvHint.setText("");
+        mTvContent.setText("");
     }
 
     // SET 方法
     @BindingAdapter("y_image_url")
     public static void setImageUrl(YImageSelectTextView ybv, String content) {
         if (ybv != null) {
-            String mCurrentStr = ybv.mTvHint.getText().toString().trim();
+            String mCurrentStr = ybv.mTvContent.getText().toString().trim();
             if (!TextUtils.isEmpty(content) && !content.equalsIgnoreCase(mCurrentStr)) {
-                ybv.mTvHint.setText(content);
+                ybv.mTvContent.setText(content);
             }
         }
     }
@@ -382,13 +382,13 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
     // GET 方法
     @InverseBindingAdapter(attribute = "y_image_url", event = "contentAttrChanged")
     public static String getImageUrlLD(YImageSelectTextView ybv) {
-        return ybv.mTvHint.getText().toString().trim();
+        return ybv.mTvContent.getText().toString().trim();
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
     @BindingAdapter(value = "contentAttrChanged", requireAll = false)
     public static void setImageUrlListener(YImageSelectTextView ybv, InverseBindingListener listener) {
-        ybv.mTvHint.addTextChangedListener(new TextWatcher() {
+        ybv.mTvContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }

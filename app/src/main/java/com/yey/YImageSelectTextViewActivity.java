@@ -10,12 +10,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.yey.databinding.ActivityYImageSelectTvBinding;
-import com.yey.vm.YSelectTextViewVM;
+import com.yey.vm.YImageSelectTextViewVM;
 import com.yey.ycustomeview.YSelectTextView;
 
 public class YImageSelectTextViewActivity extends AppCompatActivity {
     ActivityYImageSelectTvBinding binding;
-    YSelectTextViewVM mVM;
+    YImageSelectTextViewVM mVM;
     private String TAG = "YButtomSelectViewActivity.class";
 
     @Override
@@ -24,7 +24,7 @@ public class YImageSelectTextViewActivity extends AppCompatActivity {
         binding = (ActivityYImageSelectTvBinding) DataBindingUtil.setContentView(this, R.layout.activity_y_image_select_tv);
         setContentView(binding.getRoot());
         // MutableLiveData 双向绑定
-        mVM = new ViewModelProvider(this).get(YSelectTextViewVM.class);
+        mVM = new ViewModelProvider(this).get(YImageSelectTextViewVM.class);
         binding.setMVM(mVM);
 
 
