@@ -7,16 +7,16 @@
 
         <variable
             name="mVM"
-            type="com.yey.vm.YButtomViewVM" />
+            type="com.yey.vm.YImageViewVM" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".YButtomViewActivity">
+        tools:context=".YImageViewActivity">
 
-        <com.yey.ycustomeview.YButtomView
+        <com.yey.ycustomeview.YImageView
             android:id="@+id/ybtn_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -27,7 +27,7 @@
             app:y_progress_loading_color="@color/colorPrimary" />
 
 
-        <com.yey.ycustomeview.YButtomView
+        <com.yey.ycustomeview.YImageView
             android:id="@+id/ybtn_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"

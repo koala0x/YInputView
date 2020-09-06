@@ -8,24 +8,23 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.yey.databinding.ActivityYButtomViewBinding;
-import com.yey.vm.YButtomViewVM;
-import com.yey.ycustomeview.YButtomView;
+import com.yey.databinding.ActivityYImageViewBinding;
+import com.yey.vm.YImageViewVM;
+import com.yey.ycustomeview.YImageView;
 
-public class YButtomViewActivity extends AppCompatActivity {
+public class YImageViewActivity extends AppCompatActivity {
     private static final String TAG1 = "YButtomViewActivity.class";
-    private ActivityYButtomViewBinding binding;
-    private YButtomViewVM mVM;
+    private ActivityYImageViewBinding binding;
+    private YImageViewVM mVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = (ActivityYButtomViewBinding) DataBindingUtil.setContentView(this, R.layout.activity_y_buttom_view);
+        binding = (ActivityYImageViewBinding) DataBindingUtil.setContentView(this, R.layout.activity_y_image_view);
         setContentView(binding.getRoot());
         // MutableLiveData 双向绑定
-        mVM = new ViewModelProvider(this).get(YButtomViewVM.class);
+        mVM = new ViewModelProvider(this).get(YImageViewVM.class);
         binding.setMVM(mVM);
         binding.btnShowErr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,30 +53,30 @@ public class YButtomViewActivity extends AppCompatActivity {
             }
         });
         // 点击回调
-        binding.ybtn1.setYBVListener(new YButtomView.YBVListener() {
+        binding.ybtn1.setClickFocuseListener(new YImageView.IClickFocuse() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onClick(YButtomView yButtomView) {
+            public void onClick(YImageView yButtomView) {
                 Log.e(TAG1, "ybtn1 点击时候调用");
             }
 
             @SuppressLint("LongLogTag")
             @Override
-            public void getFocuse(int count, YButtomView yButtomView) {
+            public void getFocuse(int count, YImageView yButtomView) {
                 Log.e(TAG1, "ybtn1 获取焦点第" + count + "次回调");
             }
         });
         // 点击回调
-        binding.ybtn2.setYBVListener(new YButtomView.YBVListener() {
+        binding.ybtn2.setClickFocuseListener(new YImageView.IClickFocuse() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onClick(YButtomView yButtomView) {
+            public void onClick(YImageView yButtomView) {
                 Log.e(TAG1, "ybtn2 点击时候调用");
             }
 
             @SuppressLint("LongLogTag")
             @Override
-            public void getFocuse(int count, YButtomView yButtomView) {
+            public void getFocuse(int count, YImageView yButtomView) {
                 Log.e(TAG1, "ybtn2 获取焦点第" + count + "次回调");
             }
         });

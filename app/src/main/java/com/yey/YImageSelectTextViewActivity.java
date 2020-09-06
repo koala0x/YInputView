@@ -1,44 +1,42 @@
 package com.yey;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.yey.databinding.ActivityYButtomSelectBinding;
-import com.yey.databinding.ActivityYButtomViewBinding;
-import com.yey.vm.YButtomSelectViewVM;
-import com.yey.vm.YEditTextViewVM;
-import com.yey.ycustomeview.YButtomSelectHeightAutoSizeView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
-public class YButtomSelectViewActivity extends AppCompatActivity {
-    ActivityYButtomSelectBinding binding;
-    YButtomSelectViewVM mVM;
+import com.yey.databinding.ActivityYImageSelectTvBinding;
+import com.yey.vm.YSelectTextViewVM;
+import com.yey.ycustomeview.YSelectTextView;
+
+public class YImageSelectTextViewActivity extends AppCompatActivity {
+    ActivityYImageSelectTvBinding binding;
+    YSelectTextViewVM mVM;
     private String TAG = "YButtomSelectViewActivity.class";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = (ActivityYButtomSelectBinding) DataBindingUtil.setContentView(this, R.layout.activity_y_buttom_select);
+        binding = (ActivityYImageSelectTvBinding) DataBindingUtil.setContentView(this, R.layout.activity_y_image_select_tv);
         setContentView(binding.getRoot());
         // MutableLiveData 双向绑定
-        mVM = new ViewModelProvider(this).get(YButtomSelectViewVM.class);
+        mVM = new ViewModelProvider(this).get(YSelectTextViewVM.class);
         binding.setMVM(mVM);
 
 
-        binding.ybsv1.setYBSVListener(new YButtomSelectHeightAutoSizeView.YBSVListener() {
+        binding.ybsv1.setClickFocuseListener(new YSelectTextView.IClickFocuse() {
 
             @Override
-            public void onClick(YButtomSelectHeightAutoSizeView yButtomSelectView) {
+            public void onClick(YSelectTextView yButtomSelectView) {
                 Log.e(TAG, "点击获取的回调" );
             }
 
             @Override
-            public void getFocuse(int count, YButtomSelectHeightAutoSizeView yButtomSelectView) {
+            public void getFocuse(int count, YSelectTextView yButtomSelectView) {
                 Log.e(TAG, "获取焦点时获取的回调" );
             }
         });
@@ -78,7 +76,7 @@ public class YButtomSelectViewActivity extends AppCompatActivity {
         binding.btnPrintData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(YButtomSelectViewActivity.this, mVM.mChangeContent.get(), Toast.LENGTH_LONG).show();
+                Toast.makeText(YImageSelectTextViewActivity.this, mVM.mChangeContent.get(), Toast.LENGTH_LONG).show();
             }
         });
     }

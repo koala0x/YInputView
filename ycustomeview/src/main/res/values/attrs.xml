@@ -18,6 +18,8 @@
     <attr name="y_image_id" format="reference" />
     <!--        内容改变之后,TextView 字体颜色-->
     <attr name="y_content_change_color" format="color|reference" />
+    <!--        loading颜色-->
+    <attr name="y_progress_loading_color" format="color|reference" />
 
     <declare-styleable name="YEditTextView">
         <!--        EditText中文字内容-->
@@ -176,7 +178,8 @@
 
 
     </declare-styleable>
-    <declare-styleable name="YButtomView">
+
+    <declare-styleable name="YImageView">
         <!--        按钮文字内容-->
         <attr name="y_content_desc" />
         <!--        按钮文字颜色-->
@@ -195,11 +198,10 @@
         <attr name="image_size" />
 
         <!--        loading颜色-->
-        <attr name="y_progress_loading_color" format="color|reference" />
+        <attr name="y_progress_loading_color" />
     </declare-styleable>
 
-
-    <declare-styleable name="YButtomSelectView">
+    <declare-styleable name="YSelectTextView">
         <!--        按钮文字内容-->
         <attr name="y_content_desc" />
         <!--        按钮文字颜色-->
@@ -220,11 +222,13 @@
         <attr name="image_size" />
     </declare-styleable>
 
-    <declare-styleable name="YButtomSelectHeightAutoSizeView">
+    <declare-styleable name="YImageSelectTextView">
         <!--        按钮文字内容-->
         <attr name="y_content_desc" />
         <!--        按钮文字颜色-->
         <attr name="y_et_content_color" />
+        <!--        内容改变之后,TextView 字体颜色-->
+        <attr name="y_content_change_color" />
         <!--        错误提示内容-->
         <attr name="y_err_desc" />
         <!--        错误提示颜色-->
@@ -235,10 +239,10 @@
         <attr name="y_get_focus" />
         <!--        图片资源-->
         <attr name="y_image_id" />
-        <!--        内容改变之后,TextView 字体颜色-->
-        <attr name="y_content_change_color" />
         <!--        图片大小-->
         <attr name="image_size" />
+        <!--        loading颜色-->
+        <attr name="y_progress_loading_color"  />
     </declare-styleable>
 
 </resources>

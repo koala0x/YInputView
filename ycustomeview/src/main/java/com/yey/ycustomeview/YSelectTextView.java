@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,9 +26,7 @@ import com.yey.ycustomeview.Yinterface.IYInputView;
 import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
-public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYInputView {
+public class YSelectTextView extends FrameLayout implements IYInputView {
     private static final String TAG1 = "YButtomSelectView";
     private String mContentStr;
     private int mContentColor;
@@ -47,7 +44,7 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
     private ImageView mIvImage;
     private int mImageResourceId;
     // 点击回调
-    private YBSVListener mYBSVListener;
+    private IClickFocuse mIClickFocuse;
     // 错误状态记录
     private boolean hasErrStatus;
     private boolean etHasFocus;
@@ -60,27 +57,27 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
     private OnClickListener mOnClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (mYBSVListener != null) {
+            if (mIClickFocuse != null) {
                 // 点击回调
-                mYBSVListener.onClick(YButtomSelectHeightAutoSizeView.this);
+                mIClickFocuse.onClick(YSelectTextView.this);
             }
             // 是点击事件导致获取焦点
             isClick = true;
-            YButtomSelectHeightAutoSizeView.this.requestFocus();
+            YSelectTextView.this.requestFocus();
             isClick = false;
         }
     };
     private View mInflateView;
 
-    public YButtomSelectHeightAutoSizeView(@NonNull Context context) {
+    public YSelectTextView(@NonNull Context context) {
         this(context, null);
     }
 
-    public YButtomSelectHeightAutoSizeView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public YSelectTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YButtomSelectHeightAutoSizeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YSelectTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initXmlParams(context, attrs, defStyleAttr);
         initView(context);
@@ -88,16 +85,16 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
     }
 
     private void initXmlParams(Context context, AttributeSet attrs, int defStyleAttr) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YButtomSelectHeightAutoSizeView, defStyleAttr, 0);
-        mContentStr = typedArray.getString(R.styleable.YButtomSelectHeightAutoSizeView_y_content_desc);
-        mContentColor = typedArray.getColor(R.styleable.YButtomSelectHeightAutoSizeView_y_et_content_color, Color.BLACK);
-        mContentChangeColor = typedArray.getColor(R.styleable.YButtomSelectHeightAutoSizeView_y_content_change_color, Color.BLACK);
-        mErrStr = typedArray.getString(R.styleable.YButtomSelectHeightAutoSizeView_y_err_desc);
-        mErrColor = typedArray.getColor(R.styleable.YButtomSelectHeightAutoSizeView_y_tv_err_color, Color.RED);
-        mLoseFocusColor = typedArray.getColor(R.styleable.YButtomSelectHeightAutoSizeView_y_lose_focus, Color.GRAY);
-        mGetFocusColor = typedArray.getColor(R.styleable.YButtomSelectHeightAutoSizeView_y_get_focus, Color.BLUE);
-        mImageResourceId = typedArray.getResourceId(R.styleable.YButtomSelectHeightAutoSizeView_y_image_id, 0);
-        mSizeImage = typedArray.getDimensionPixelSize(R.styleable.YButtomSelectHeightAutoSizeView_image_size, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YSelectTextView, defStyleAttr, 0);
+        mContentStr = typedArray.getString(R.styleable.YSelectTextView_y_content_desc);
+        mContentColor = typedArray.getColor(R.styleable.YSelectTextView_y_et_content_color, Color.BLACK);
+        mContentChangeColor = typedArray.getColor(R.styleable.YSelectTextView_y_content_change_color, Color.BLACK);
+        mErrStr = typedArray.getString(R.styleable.YSelectTextView_y_err_desc);
+        mErrColor = typedArray.getColor(R.styleable.YSelectTextView_y_tv_err_color, Color.RED);
+        mLoseFocusColor = typedArray.getColor(R.styleable.YSelectTextView_y_lose_focus, Color.GRAY);
+        mGetFocusColor = typedArray.getColor(R.styleable.YSelectTextView_y_get_focus, Color.BLUE);
+        mImageResourceId = typedArray.getResourceId(R.styleable.YSelectTextView_y_image_id, 0);
+        mSizeImage = typedArray.getDimensionPixelSize(R.styleable.YSelectTextView_image_size, 0);
         typedArray.recycle();
     }
 
@@ -110,7 +107,7 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
         this.setClickable(true);
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
-        mInflateView = LayoutInflater.from(context).inflate(R.layout.layout_y_buttom_select_height_auto_size_view, this, true);
+        mInflateView = LayoutInflater.from(context).inflate(R.layout.layout_y_select_text_view, this, true);
 
 
         mTvContent = (TextView) findViewById(R.id.tv_y_content);
@@ -165,15 +162,15 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
             public void onFocusChange(View v, boolean hasFocus) {
                 etHasFocus = hasFocus;
                 if (hasFocus) {
-                    if (mYBSVListener != null && !isClick) {
+                    if (mIClickFocuse != null && !isClick) {
                         // 焦点获取
-                        mYBSVListener.getFocuse(mCountFocus, YButtomSelectHeightAutoSizeView.this);
+                        mIClickFocuse.getFocuse(mCountFocus, YSelectTextView.this);
                         mCountFocus++;
 
                     }
                     mTvHint.setTextColor(mGetFocusColor);
                     mLineView.setBackgroundColor(mGetFocusColor);
-                    KeyboardUtils.hideSoftInput(YButtomSelectHeightAutoSizeView.this);
+                    KeyboardUtils.hideSoftInput(YSelectTextView.this);
                 } else {
                     mTvHint.setTextColor(mLoseFocusColor);
                     mLineView.setBackgroundColor(mLoseFocusColor);
@@ -211,33 +208,33 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
             }
         });
 
-        this.getViewTreeObserver()
-                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        int width = mIvImage.getWidth();
-                        // 为内容显示控件设置右边距
-                        RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) mTvContent.getLayoutParams();
-                        layoutParams1.setMargins(0, 0, width + 4, 0);
-                        mTvContent.setLayoutParams(layoutParams1);
-                        YButtomSelectHeightAutoSizeView.this.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    }
-                });
+//        this.getViewTreeObserver()
+//                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override
+//                    public void onGlobalLayout() {
+//                        int width = mIvImage.getWidth();
+//                        // 为内容显示控件设置右边距
+//                        RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) mTvContent.getLayoutParams();
+//                        layoutParams1.setMargins(0, 0, width + 4, 0);
+//                        mTvContent.setLayoutParams(layoutParams1);
+//                        YSelectTextView.this.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                    }
+//                });
     }
 
 
     // 为YButtomView设置回调监听
-    public void setYBSVListener(YBSVListener ybsvListener) {
-        mYBSVListener = ybsvListener;
+    public void setClickFocuseListener(IClickFocuse iClickFocuse) {
+        this.mIClickFocuse = iClickFocuse;
     }
 
-    public interface YBSVListener {
+    public interface IClickFocuse {
         /**
          * 控件被点击
          *
          * @param yButtomSelectView
          */
-        void onClick(YButtomSelectHeightAutoSizeView yButtomSelectView);
+        void onClick(YSelectTextView yButtomSelectView);
 
         /**
          * 控件第几次获取到焦点
@@ -245,7 +242,7 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
          * @param count
          * @param yButtomSelectView
          */
-        void getFocuse(int count, YButtomSelectHeightAutoSizeView yButtomSelectView);
+        void getFocuse(int count, YSelectTextView yButtomSelectView);
     }
 
 
@@ -401,7 +398,7 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
 
     // SET 方法
     @BindingAdapter("y_change_content")
-    public static void setBindingContent(YButtomSelectHeightAutoSizeView ybsv, String content) {
+    public static void setBindingContent(YSelectTextView ybsv, String content) {
         if (ybsv != null) {
             String mCurrentStr = ybsv.mTvContent.getText().toString().trim();
             if (!TextUtils.isEmpty(content)) {
@@ -414,13 +411,13 @@ public class YButtomSelectHeightAutoSizeView extends FrameLayout implements IYIn
 
     // GET 方法
     @InverseBindingAdapter(attribute = "y_change_content", event = "contentAttrChanged")
-    public static String getBindingContentLD(YButtomSelectHeightAutoSizeView ybsv) {
+    public static String getBindingContentLD(YSelectTextView ybsv) {
         return ybsv.mTvContent.getText().toString().trim();
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
     @BindingAdapter(value = "contentAttrChanged", requireAll = false)
-    public static void setContentChangeListener(YButtomSelectHeightAutoSizeView ybsv, InverseBindingListener listener) {
+    public static void setContentChangeListener(YSelectTextView ybsv, InverseBindingListener listener) {
         ybsv.mTvContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -5,9 +5,9 @@
 
     <data>
 
-<!--        <variable-->
-<!--            name="mVM"-->
-<!--            type="com.yey.vm.MyVM" />-->
+        <!--        <variable-->
+        <!--            name="mVM"-->
+        <!--            type="com.yey.vm.MyVM" />-->
     </data>
 
     <LinearLayout
@@ -15,21 +15,33 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
-        <Button
-            android:id="@+id/btn_yedittextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YEditTextView 测试" />
-        <Button
-            android:id="@+id/btn_ybuttomview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YButtomView 测试" />
-        <Button
-            android:id="@+id/btn_ybuttomselectview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YButtomSelectView 测试" />
 
+        <Button
+            android:id="@+id/btn_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YEditTextView 测试"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_im"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YImageView 测试"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_select_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YSelectTextView 测试"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_image_select_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YImageSelectTextView 测试"
+            android:textAllCaps="false" />
     </LinearLayout>
 </layout>
