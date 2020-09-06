@@ -16,7 +16,7 @@
         android:orientation="vertical"
         tools:context=".YButtomSelectViewActivity">
 
-        <com.yey.ycustomeview.YButtomSelectView
+        <com.yey.ycustomeview.YButtomSelectHeightAutoSizeView
             android:id="@+id/ybsv_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -29,7 +29,7 @@
             app:y_image_id="@drawable/kk"
             app:y_lose_focus="@android:color/darker_gray" />
 
-        <com.yey.ycustomeview.YButtomSelectView
+        <com.yey.ycustomeview.YButtomSelectHeightAutoSizeView
             android:id="@+id/ybsv_2"
             android:layout_width="match_parent"
             android:layout_height="60dp"

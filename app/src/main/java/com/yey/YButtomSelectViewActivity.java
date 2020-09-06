@@ -13,7 +13,7 @@ import com.yey.databinding.ActivityYButtomSelectBinding;
 import com.yey.databinding.ActivityYButtomViewBinding;
 import com.yey.vm.YButtomSelectViewVM;
 import com.yey.vm.YEditTextViewVM;
-import com.yey.ycustomeview.YButtomSelectView;
+import com.yey.ycustomeview.YButtomSelectHeightAutoSizeView;
 
 public class YButtomSelectViewActivity extends AppCompatActivity {
     ActivityYButtomSelectBinding binding;
@@ -30,15 +30,15 @@ public class YButtomSelectViewActivity extends AppCompatActivity {
         binding.setMVM(mVM);
 
 
-        binding.ybsv1.setYBSVListener(new YButtomSelectView.YBSVListener() {
+        binding.ybsv1.setYBSVListener(new YButtomSelectHeightAutoSizeView.YBSVListener() {
 
             @Override
-            public void onClick(YButtomSelectView yButtomSelectView) {
+            public void onClick(YButtomSelectHeightAutoSizeView yButtomSelectView) {
                 Log.e(TAG, "点击获取的回调" );
             }
 
             @Override
-            public void getFocuse(int count, YButtomSelectView yButtomSelectView) {
+            public void getFocuse(int count, YButtomSelectHeightAutoSizeView yButtomSelectView) {
                 Log.e(TAG, "获取焦点时获取的回调" );
             }
         });
