@@ -13,8 +13,7 @@
         android:layout_marginLeft="4dp"
         android:layout_weight="2"
         android:gravity="center_vertical"
-        android:textSize="10sp"
-        tools:text="提示" />
+        android:textSize="10sp" />
     <!--    EditText设置单行并且设置imeOptions="actionNext"是为了键盘右下角按钮为下一步按钮-->
 
 
@@ -35,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="bottom"
-            tools:text="头 "
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 <!--        android:focusable="true"-->
@@ -49,8 +47,7 @@
             android:imeOptions="actionNext"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            tools:text="内容" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 
@@ -69,6 +66,5 @@
         android:layout_marginLeft="4dp"
         android:layout_weight="2"
         android:gravity="center_vertical"
-        android:textSize="10sp"
-        tools:text="报错" />
+        android:textSize="10sp" />
 </LinearLayout>

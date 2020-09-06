@@ -27,8 +27,7 @@
             android:layout_gravity="left"
             android:gravity="bottom"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            tools:text="内容" />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/iv_image"
@@ -66,6 +65,5 @@
         android:layout_marginLeft="4dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:textSize="10sp"
-        tools:text="报错" />
+        android:textSize="10sp" />
 </LinearLayout>
