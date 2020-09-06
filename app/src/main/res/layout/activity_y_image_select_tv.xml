@@ -10,88 +10,94 @@
             type="com.yey.vm.YImageSelectTextViewVM" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".YSelectTextViewActivity">
+        android:layout_height="match_parent">
 
-        <com.yey.ycustomeview.YImageSelectTextView
-            android:id="@+id/ybsv_1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:image_size="10dp"
-            app:y_change_content="@={mVM.mChangeContent}"
-            app:y_content_change_color="@android:color/black"
-            app:y_content_desc="证件照类型"
-            app:y_et_content_color="@android:color/darker_gray"
-            app:y_get_focus="@color/colorPrimary"
-            app:y_image_id="@drawable/kk"
-            app:y_lose_focus="@android:color/darker_gray" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".YSelectTextViewActivity">
 
-        <com.yey.ycustomeview.YImageSelectTextView
-            android:id="@+id/ybsv_2"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:image_size="10dp"
-            app:y_change_content="@={mVM.mChangeContent}"
-            app:y_content_change_color="@android:color/black"
-            app:y_content_desc="证件照类型"
-            app:y_et_content_color="@android:color/darker_gray"
-            app:y_get_focus="@color/colorPrimary"
-            app:y_image_id="@drawable/kk"
-            app:y_lose_focus="@android:color/darker_gray" />
+            <com.yey.ycustomeview.YImageSelectTextView
+                android:id="@+id/ybsv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image_size="10dp"
+                app:y_change_content="@={mVM.mChangeContent}"
+                app:y_content_change_color="@android:color/black"
+                app:y_content_desc="证件照类型"
+                app:y_et_content_color="@android:color/darker_gray"
+                app:y_get_focus="@color/colorPrimary"
+                app:y_image_id="@drawable/kk"
+                app:y_lose_focus="@android:color/darker_gray" />
 
-        <com.yey.ycustomeview.YImageSelectTextView
-            android:id="@+id/ybshav_3"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:image_size="10dp"
-            app:y_change_content="@={mVM.mChangeContent}"
-            app:y_content_change_color="@android:color/black"
-            app:y_content_desc="证件照类型"
-            app:y_et_content_color="@android:color/darker_gray"
-            app:y_get_focus="@color/colorPrimary"
-            app:y_image_id="@drawable/kk"
-            app:y_lose_focus="@android:color/darker_gray" />
+            <com.yey.ycustomeview.YImageSelectTextView
+                android:id="@+id/ybsv_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image_size="10dp"
+                app:y_change_content="@={mVM.mChangeContent}"
+                app:y_content_change_color="@android:color/black"
+                app:y_content_desc="证件照类型"
+                app:y_et_content_color="@android:color/darker_gray"
+                app:y_get_focus="@color/colorPrimary"
+                app:y_image_id="@drawable/kk"
+                app:y_lose_focus="@android:color/darker_gray" />
 
-
-        <Button
-            android:id="@+id/btn_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="改变内容" />
-
-        <Button
-            android:id="@+id/btn_clear_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="清空控件内容" />
-
-        <Button
-            android:id="@+id/btn_show_err"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="显示错误" />
-
-        <Button
-            android:id="@+id/btn_hide_err"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="隐藏错误" />
-
-        <Button
-            android:id="@+id/btn_print_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="打印数据" />
-
-        <Button
-            android:id="@+id/btn_request_focus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="获取焦点" />
+            <com.yey.ycustomeview.YImageSelectTextView
+                android:id="@+id/ybshav_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image_size="10dp"
+                app:y_change_content="@={mVM.mChangeContent}"
+                app:y_content_change_color="@android:color/black"
+                app:y_content_desc="证件照类型"
+                app:y_et_content_color="@android:color/darker_gray"
+                app:y_get_focus="@color/colorPrimary"
+                app:y_image_id="@drawable/kk"
+                app:y_lose_focus="@android:color/darker_gray" />
 
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="改变内容" />
+
+            <Button
+                android:id="@+id/btn_clear_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清空控件内容" />
+
+            <Button
+                android:id="@+id/btn_show_err"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="显示错误" />
+
+            <Button
+                android:id="@+id/btn_hide_err"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="隐藏错误" />
+
+            <Button
+                android:id="@+id/btn_print_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="打印数据" />
+
+            <Button
+                android:id="@+id/btn_request_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取焦点" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 </layout>
