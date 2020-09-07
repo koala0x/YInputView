@@ -141,7 +141,6 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         }
 
 
-
         mTvErr = (TextView) findViewById(R.id.tv_y_err);
         mTvErr.setText(mErrStr);
         mTvErr.setTextColor(mErrColor);
@@ -224,9 +223,6 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
     // 为YButtomView设置回调监听
     public void setClickFocuseListener(IClickFocuse iClickFocuse) {
         this.mIClickFocuse = iClickFocuse;
-    }
-
-    public void setClickFocuseListener(YSelectTextView.IClickFocuse iClickFocuse) {
     }
 
     public interface IClickFocuse {
