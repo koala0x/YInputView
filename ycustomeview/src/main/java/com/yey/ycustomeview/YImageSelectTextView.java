@@ -77,6 +77,7 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
             isClick = false;
         }
     };
+    private TextView mTvUrl;
 
 
     public YImageSelectTextView(@NonNull Context context) {
@@ -121,6 +122,8 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
         LayoutInflater.from(context).inflate(R.layout.layout_y_image_select_text_view, this, true);
+
+        mTvUrl = new TextView(context);
 
         mTvContent = (TextView) findViewById(R.id.tv_yistv_content);
         mTvContent.setText(mContentStr);
@@ -352,6 +355,15 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
     }
 
     /**
+     * 更改图片Url链接
+     *
+     * @param content
+     */
+    public void setUrlContent(String content) {
+        mTvUrl.setText(content);
+    }
+
+    /**
      * 获取控件内容
      *
      * @return
@@ -362,6 +374,15 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
     }
 
     /**
+     * 获取图片Url链接
+     *
+     * @return
+     */
+    public String getUrlContent() {
+        return mTvUrl.getText().toString().trim();
+    }
+
+    /**
      * 清空控件内容
      */
     @Override
@@ -369,13 +390,23 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
         mTvContent.setText("");
     }
 
+    /**
+     * 清除图片Url链接以及图片
+     */
+    public void clearImageUrlContent() {
+        mTvUrl.setText("");
+        if (mImageResourceId != 0) {
+            getIcon().setImageResource(mImageResourceId);
+        }
+    }
+
     // SET 方法
     @BindingAdapter("y_image_url")
     public static void setImageUrl(YImageSelectTextView ybv, String content) {
         if (ybv != null) {
-            String mCurrentStr = ybv.mTvContent.getText().toString().trim();
+            String mCurrentStr = ybv.mTvUrl.getText().toString().trim();
             if (!TextUtils.isEmpty(content) && !content.equalsIgnoreCase(mCurrentStr)) {
-                ybv.mTvContent.setText(content);
+                ybv.mTvUrl.setText(content);
             }
         }
     }
@@ -383,13 +414,13 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
     // GET 方法
     @InverseBindingAdapter(attribute = "y_image_url", event = "ImageUrlAttrChanged")
     public static String getImageUrlLD(YImageSelectTextView ybv) {
-        return ybv.mTvContent.getText().toString().trim();
+        return ybv.mTvUrl.getText().toString().trim();
     }
 
     // 监听,如果有变动就调用listener中的onChange方法
     @BindingAdapter(value = "ImageUrlAttrChanged", requireAll = false)
     public static void setImageUrlListener(YImageSelectTextView ybv, InverseBindingListener listener) {
-        ybv.mTvContent.addTextChangedListener(new TextWatcher() {
+        ybv.mTvUrl.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
