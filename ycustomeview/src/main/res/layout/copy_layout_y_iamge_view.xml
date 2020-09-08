@@ -3,28 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:background="@android:color/white">
 
 
     <TextView
-        android:id="@+id/tv_yistv_hint"
+        android:id="@+id/tv_temp_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
         android:layout_marginRight="48dp"
+        android:layout_marginBottom="2dp"
         android:gravity="center_vertical"
         android:textSize="10sp"
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tv_yistv_content"
+        android:id="@+id/tv_ybv_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_yistv_hint"
-        android:layout_alignLeft="@+id/tv_yistv_hint"
+        android:layout_below="@+id/tv_temp_content"
+        android:layout_alignLeft="@+id/tv_temp_content"
+        android:layout_gravity="left"
         android:layout_marginRight="48dp"
         android:background="@android:color/black"
         android:gravity="bottom"
@@ -35,7 +35,7 @@
         android:id="@+id/iv_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/tv_yistv_content"
+        android:layout_alignBottom="@+id/tv_ybv_hint"
         android:layout_alignParentRight="true"
         android:layout_marginRight="4dp"
         android:adjustViewBounds="true"
@@ -46,7 +46,7 @@
         android:id="@+id/pb_loading"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/tv_yistv_content"
+        android:layout_alignBottom="@+id/tv_ybv_hint"
         android:layout_alignParentRight="true"
         android:background="@android:color/white"
         android:indeterminateTint="@android:color/black"
@@ -56,7 +56,7 @@
         android:id="@+id/v_y_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/tv_yistv_content"
+        android:layout_below="@+id/tv_ybv_hint"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:background="@android:color/black" />
@@ -69,5 +69,6 @@
         android:layout_marginLeft="4dp"
         android:gravity="center_vertical"
         android:textSize="10sp" />
+
 
 </RelativeLayout>

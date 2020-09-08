@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.yey.databinding.ActivityYImageSelectTvBinding;
 import com.yey.vm.YImageSelectTextViewVM;
+import com.yey.ycustomeview.YImageSelectTextView;
 import com.yey.ycustomeview.YSelectTextView;
 
 public class YImageSelectTextViewActivity extends AppCompatActivity {
@@ -28,15 +29,15 @@ public class YImageSelectTextViewActivity extends AppCompatActivity {
         binding.setMVM(mVM);
 
 
-        binding.ybsv1.setClickFocuseListener(new YSelectTextView.IClickFocuse() {
+        binding.ybsv1.setClickFocuseListener(new YImageSelectTextView.IClickFocuse() {
 
             @Override
-            public void onClick(YSelectTextView yButtomSelectView) {
+            public void onClick(YImageSelectTextView yButtomSelectView) {
                 Log.e(TAG, "点击获取的回调" );
             }
 
             @Override
-            public void getFocuse(int count, YSelectTextView yButtomSelectView) {
+            public void getFocuse(int count, YImageSelectTextView yButtomSelectView) {
                 Log.e(TAG, "获取焦点时获取的回调" );
             }
         });

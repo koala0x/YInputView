@@ -19,7 +19,7 @@
         <com.yey.ycustomeview.YImageView
             android:id="@+id/ybtn_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:image_size="20dp"
             app:y_content_desc="牌照"
             app:y_err_desc="错误"
@@ -30,7 +30,7 @@
         <com.yey.ycustomeview.YImageView
             android:id="@+id/ybtn_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:image_size="20dp"
             app:y_content_desc="牌照2"
             app:y_err_desc="错误2"

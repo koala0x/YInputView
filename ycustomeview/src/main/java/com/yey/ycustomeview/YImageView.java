@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -142,8 +143,8 @@ public class YImageView extends FrameLayout implements IYInputView {
         if (mSizeImage != 0) {
             ViewGroup.LayoutParams layoutParams = mIvImage.getLayoutParams();
             layoutParams.width = mSizeImage;
+            layoutParams.height = mSizeImage;
             mIvImage.setLayoutParams(layoutParams);
-            // mPbLoanding.setLayoutParams(layoutParams);
         }
 
 
@@ -155,6 +156,17 @@ public class YImageView extends FrameLayout implements IYInputView {
 //        } else {
 //            mPbLoanding.setBackgroundColor(mProgressLoadingColor);
 //        }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int wMeasureSpec = MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY);
+        int hMeasureSpec = MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY);
+        //使子View显示
+        for (int i = 0; i < getChildCount(); i++) {
+            getChildAt(i).measure(wMeasureSpec, hMeasureSpec);
+        }
     }
 
     private void initListener() {
@@ -185,6 +197,7 @@ public class YImageView extends FrameLayout implements IYInputView {
                 }
             }
         });
+
     }
 
     // 为YButtomView设置回调监听
@@ -384,3 +397,18 @@ public class YImageView extends FrameLayout implements IYInputView {
     }
 
 }
+
+
+//        this.getViewTreeObserver()
+//                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override
+//                    public void onGlobalLayout() {
+//                        int width = mIvImage.getWidth();
+//                        if (mSizeImage != 0) {
+//                            ViewGroup.LayoutParams layoutParams = mIvImage.getLayoutParams();
+//                            layoutParams.width = mSizeImage;
+//                            mIvImage.setLayoutParams(layoutParams);
+//                        }
+//                        YImageView.this.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                    }
+//                });
