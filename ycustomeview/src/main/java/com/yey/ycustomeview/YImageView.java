@@ -28,7 +28,7 @@ import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YImageView extends FrameLayout implements IYInputView {
-    private static String mHintStr;
+    private String mHintStr;
     private int mContentColor;
     private int mSizeImage;
     private String mErrStr;
