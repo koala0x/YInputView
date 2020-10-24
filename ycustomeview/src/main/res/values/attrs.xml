@@ -40,6 +40,8 @@
         <attr name="y_focus_hint_desc" format="string|reference" />
         <!--        输入字符的长度-->
         <attr name="maxLength" format="integer" min="0" />
+        <!--        背景颜色-->
+        <attr name="y_bg_color" format="color|reference" />
         <!--        输入内容的类型-->
         <attr name="inputType">
             <!-- There is no content type.  The text is not editable. -->
@@ -242,7 +244,7 @@
         <!--        图片大小-->
         <attr name="image_size" />
         <!--        loading颜色-->
-        <attr name="y_progress_loading_color"  />
+        <attr name="y_progress_loading_color" />
     </declare-styleable>
 
 </resources>

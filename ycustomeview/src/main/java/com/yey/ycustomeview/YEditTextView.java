@@ -41,6 +41,8 @@ public class YEditTextView extends FrameLayout implements IYInputView {
     private String mFocusHintStr;
     private String mContentStr;
     private int mErrColor;
+    // 背景颜色
+    private int mBGColor;
     // 失去焦点时候提示颜色
     private int mLoseFocusColor;
     // 获取焦点时候提示颜色
@@ -84,6 +86,7 @@ public class YEditTextView extends FrameLayout implements IYInputView {
         mLoseFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_lose_focus, Color.GRAY);
         mGetFocusColor = typedArray.getColor(R.styleable.YEditTextView_y_get_focus, Color.BLUE);
         mEtContentColor = typedArray.getColor(R.styleable.YEditTextView_y_et_content_color, Color.BLACK);
+        mBGColor = typedArray.getColor(R.styleable.YEditTextView_y_bg_color, Color.WHITE);
         mInputType = typedArray.getInt(R.styleable.YEditTextView_inputType, EditorInfo.TYPE_CLASS_TEXT);
         mMaxLength = typedArray.getInt(R.styleable.YEditTextView_maxLength, 0);
         typedArray.recycle();
@@ -128,8 +131,8 @@ public class YEditTextView extends FrameLayout implements IYInputView {
             mTvHint.setVisibility(View.VISIBLE);
         }
         mTvErr.setVisibility(View.INVISIBLE);
-
-
+        // 设置背景颜色
+        findViewById(R.id.container).setBackgroundColor(mBGColor);
     }
 
 
