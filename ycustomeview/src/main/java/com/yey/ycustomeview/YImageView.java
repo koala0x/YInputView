@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -28,7 +27,7 @@ import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YImageView extends FrameLayout implements IYInputView {
-    private static String mHintStr;
+    private String mHintStr;
     private int mContentColor;
     private int mSizeImage;
     private String mErrStr;
@@ -115,7 +114,7 @@ public class YImageView extends FrameLayout implements IYInputView {
         this.setClickable(true);
         this.setFocusable(true);
         this.setFocusableInTouchMode(true);
-        LayoutInflater.from(context).inflate(R.layout.layout_y_iamge_view, this, true);
+        LayoutInflater.from(context).inflate(R.layout.layout_yiamge_view, this, true);
         mTvHint = (TextView) findViewById(R.id.tv_ybv_hint);
         mTvHint.setText(mHintStr);
         mTvHint.setTextColor(mContentColor);

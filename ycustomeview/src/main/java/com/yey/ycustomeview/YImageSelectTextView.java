@@ -28,10 +28,8 @@ import com.yey.ycustomeview.Yinterface.OnDebouncingClickListener;
 import com.yey.ycustomeview.util.KeyboardUtils;
 
 public class YImageSelectTextView extends FrameLayout implements IYInputView {
-    // 提示
-    private static String mHintStr;
     // 内容
-    private static String mContentStr;
+    private String mContentStr;
     private int mContentColor;
     private int mContentChangeColor;
     private int mSizeImage;
@@ -98,8 +96,7 @@ public class YImageSelectTextView extends FrameLayout implements IYInputView {
 
     private void initXmlParams(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YImageSelectTextView, defStyleAttr, 0);
-        mContentStr = typedArray.getString(R.styleable.YEditTextView_y_content_desc);
-        mHintStr = typedArray.getString(R.styleable.YImageSelectTextView_y_content_desc);
+        mContentStr = typedArray.getString(R.styleable.YImageSelectTextView_y_content_desc);
         mContentColor = typedArray.getColor(R.styleable.YImageSelectTextView_y_et_content_color, Color.BLACK);
         mContentChangeColor = typedArray.getColor(R.styleable.YImageSelectTextView_y_content_change_color, Color.BLACK);
         mProgressLoadingColor = typedArray.getColor(R.styleable.YImageSelectTextView_y_progress_loading_color, Color.BLUE);
